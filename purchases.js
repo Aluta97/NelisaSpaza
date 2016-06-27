@@ -138,7 +138,6 @@ exports.catProfit = function(profitMap){
     var catProfit = profitMap[product];
     catProfitMap[category] = catProfitMap[category] + catProfit;
   }
-  //console.log(catProfitMap);
   var mostProfitableCategory = {};
     var max = 0;
 
