@@ -1,204 +1,205 @@
+
 var fs = require('fs');
-	exports.salesData = function(filePath){
-		var file = fs.readFileSync(filePath,"utf8");
-		var newFile = file
-		.replace("Day,Date,stock item,No sold,Sales Price\n", "")
-		.split('\n');
 
-		var productList = [];
-		var productsArray = []
+exports.salesList = function(filepath) {
 
-		for(var i = 0; i < newFile.length - 1;i++){
-			productsArray.push(newFile[i]);
-		}
+  var inputSales = fs.readFileSync(filepath, "utf8");
+  inputSales = inputSales.replace("Day,Date,stock item,No sold,Sales Price\n", "").split('\n');
 
-		productsArray.forEach(function(newProducts){
-			var otherProducts = newProducts.split(",");
-			var productName = otherProducts[2];
-			var quantity = otherProducts[3];
-			var sellingPrice = Number(otherProducts[4].replace("R","").replace(",","."));
+  var salesArray = [];
 
+  for (i = 0; i < inputSales.length - 1; i++) {
+    salesArray.push(inputSales[i].split(","));
+  }
+  var salesList = [];
 
-			var prodObj = {
-				productName:productName,
-				quantity: Number(quantity),
-				sellingPrice: sellingPrice
-			};
-			productList.push(prodObj);
-		});
-		return productList;
-	};
+  salesArray.forEach(function(array) {
+    salesList.push([array[2], Number(array[3]), array[4]]);
+  });
 
-	exports.groupByQuantity = function(productList){
-	 	var productMap ={};
+  salesList.sort();
+  return salesList;
+};
 
-	 	productList.forEach(function(product){
-	 		//console.log(product);
-	 		var item = product.productName;
-	 		var qty = product.quantity;
+exports.getWeeklySales = function(salesList) {
 
-	 		if(productMap[item] === undefined){
-	 			productMap[item] = 0;
-	 		}
+  var weeklySales = {};
 
-	 		productMap[item] = productMap[item] + qty;
-	 	});
-	 	//console.log(productMap);
-	 	return productMap;
-	};
-	exports.salesPerWeek = function(productList){
-		//console.log(productList);
-		var weeklySales = {};
+  salesList.forEach(function(array) {
+    if (!weeklySales.hasOwnProperty(array[0])) {
+      weeklySales[array[0]] = array[1];
+    } else {
+      weeklySales[array[0]] += array[1];
+    }
+  });
 
-  		productList.forEach(function(sale) {
-  			var product = sale.productName;
-  			var sale = Number(sale.quantity * sale.sellingPrice)
+  return weeklySales;
+};
 
-    		if (!weeklySales.hasOwnProperty(product)) {
-      			weeklySales[product] = 0;
-    		}
-      		weeklySales[product] += sale;
-  		});
-  		return weeklySales
-	};
+exports.getMostPopularProduct = function(weeklySales) {
 
-	exports.mostPopularProd = function(productMap){
-		var mostPopularProduct = {};
-		var max = 0;
-		for(key in productMap){
-			if(productMap[key] > max){
-				max = productMap[key];
+  var mostSold = 0;
+  var mostPP = "";
 
-				mostPopularProduct = {
-					product : key,
-					quantity: max
-				};
-			}
-		}
-		return mostPopularProduct;
-	}
-	exports.leastPopularProd = function(productMap,max){
-		var leastPopularProduct = {};
-		var min = max;
-		for(key in productMap){
-			if(productMap[key] < min){
-				min = productMap[key];
+  for (var product in weeklySales) {
+    if (weeklySales[product] > mostSold) {
+      mostSold = weeklySales[product];
+      mostPP = product;
+    }
+  }
 
-				leastPopularProduct = {
-					product : key,
-					quantity: min
-				};
-			}
-		}
-		return leastPopularProduct;
-	}
-	var productCatMap = {
-		'Milk 1l': 'Dairy',
-		'Imasi': 'Dairy',
-		'Bread': 'Bakery',
-		'Chakalaka Can': 'Canned Food',
-		'Gold Dish Vegetable Curry Can': 'Canned Food',
-		'Fanta 500ml': 'Soft-Drinks',
-		'Coke 500ml': 'Soft-Drinks',
-		'Cream Soda 500ml': 'Soft-Drinks',
-		'Iwisa Pap 5kg': 'Starch',
-		'Top Class Soy Mince': 'Meat',
-		'Shampoo 1 litre': 'Toiletries',
-		'Soap Bar': 'Toiletries',
-		'Bananas - loose': 'Fruits',
-		'Apples - loose': 'Fruits',
-		'Mixed Sweets 5s': 'Candy',
-		'Heart Chocolates': 'Candy',
-		'Rose (plastic)': 'Extras',
-		'Valentine Cards': 'Extras'
- 		}
-	exports.mostPopularCat = function(productMap){
- 		var catMap = {};
+  var mostPopularProduct = {
+    description: 'most popular product',
+    product: mostPP,
+    quantity: mostSold
+  };
+//  console.log(mostPopularProduct)
+  return mostPopularProduct;
+};
 
- 		for (var product in productMap){
- 			var category = productCatMap[product];
- 			if (catMap[category] === undefined){
- 				catMap[category] = 0;
- 			}
- 			var prodQty = productMap[product];
- 			catMap[category] = catMap[category] + prodQty;
- 		}
-      //  console.log(catMap);
- 		var mostPopularCategory = {};
- 		var max = 0;
+exports.getLeastPopularProduct = function(weeklySales) {
 
- 		for(var cat in catMap) {
- 			var value = catMap[cat];
- 			if(catMap[cat] > max){
- 				max = catMap[cat];
- 				mostPopularCategory = {
- 					category: cat,
- 					quantity: max
- 				}
- 			}
- 		}
- 		return mostPopularCategory;
- 	};
- 	exports.leastPopularCat = function(productMap,max){
+  var leastSold = 1000;
+  var leastPP = "";
 
+  for (product in weeklySales) {
+    if (weeklySales[product] < leastSold) {
+      leastSold = weeklySales[product];
+      leastPP = product;
+    }
+  }
 
- 		var catMap = {};
+  var leastPopularProduct = {
+    description: 'least popular product',
+    product: leastPP,
+    quantity: leastSold
+  };
+//  console.log(leastPopularProduct)
+  return leastPopularProduct;
+};
+/////////////////////////////////////
+exports.getCategories = function(filepath) {
 
- 		for (var product in productMap){
- 			var category = productCatMap[product];
+  var inputCategories = fs.readFileSync(filepath, "utf8");
+  inputCategories = inputCategories.split('\n');
 
- 			if (catMap[category] === undefined){
- 				catMap[category] = 0;
- 			}
- 			var prodQty = productMap[product];
- 			catMap[category] = catMap[category] + prodQty;
- 		}
+  var categoriesArray = [];
 
- 		var leastPopularCategory = {};
- 		var min = max;
+  for (i = 0; i < inputCategories.length - 1; i++) {
+    categoriesArray.push(inputCategories[i].split(","));
+  }
 
- 		for(var cat in catMap) {
- 			var value = catMap[cat];
- 			if(catMap[cat] < min){
- 				min = catMap[cat];
- 				leastPopularCategory = {
- 					category: cat,
- 					quantity: min
- 				}
- 			}
- 		}
- 		return leastPopularCategory;
- 	}
- 	exports.weeklyPurchases = function(inputPurchases){
+  categoriesArray.sort();
 
- 		var purchasesArray = [];
+  var categories = {};
 
-  		for (i = 0; i < inputPurchases.length - 1; i++) {
-    		purchasesArray.push(inputPurchases[i].split(";"));
-  		}
+  categoriesArray.forEach(function(array) {
+    if (!categories.hasOwnProperty(array[0])) {
+      categories[array[0]] = array[1];
+    }
+  })
 
-  		for (var i = purchasesArray.length - 1; i >= 0; i--) {
-    		}
-  	}
+  return categories;
 
-		exports.getMostProfitableProduct = function(totalProfit) {
+}
 
-		  var profit = [];
+exports.getCatSales = function(categories, weekly_sales) {
 
-		  for (var product in totalProfit) {
-		    profit.push(totalProfit[product]);
-		  }
+  var catSales = {};
 
-		  var mostProfit = Math.max.apply(null, profit);
+  for (var product in categories) {
+    for (var products in weekly_sales) {
+      if (product === products) {
+        if (!catSales.hasOwnProperty(categories[product])) {
+          catSales[categories[product]] = weekly_sales[products];
+        } else {
+          catSales[categories[product]] += weekly_sales[products];
+        }
+      }
+    }
+  }
 
-		  for (product in totalProfit) {
-		    if (totalProfit[product] === mostProfit) {
-		      var mostProfitableProduct = {
-		        productName :  product,
-		        profit: mostProfit
-		      };
-		    }
-		  }
+  return catSales;
+}
 
-		  return mostProfitableProduct;
-		 }
+exports.getMostPopularCategory = function(catSales) {
+
+  var mostCatSold = 0;
+  var category = "";
+
+  for (var cat in catSales) {
+    if (catSales[cat] > mostCatSold) {
+      mostCatSold = catSales[cat];
+      category = cat;
+    }
+  }
+
+  var mostPopularCategory = {
+    "description": "most Popular Category",
+    "product": category,
+    "quantity": mostCatSold
+  }
+
+  return mostPopularCategory;
+}
+
+exports.getLeastPopularCategory = function(catSales) {
+
+  var leastCatSold = 50;
+  var category = "";
+
+  for (var cat in catSales) {
+    if (catSales[cat] < leastCatSold) {
+      leastCatSold = catSales[cat];
+      category = cat;
+    }
+  }
+
+  var leastPopularCategory = {
+    "description": "least Popular Category",
+    "product": category,
+    "quantity": leastCatSold
+  }
+//console.log(leastPopularCategory);
+  return leastPopularCategory;
+}
+
+exports.getCatProfit = function(categories, totalProfit) {
+
+  var catProfit = {};
+
+  for (var product in categories) {
+    for (var products in totalProfit) {
+      if (product === products) {
+        if (!catProfit.hasOwnProperty(categories[product])) {
+          catProfit[categories[product]] = totalProfit[products];
+        } else {
+          catProfit[categories[product]] += totalProfit[products];
+        }
+      }
+    }
+  }
+
+  return catProfit;
+}
+
+exports.getMostProfitableCategory = function(catProfit) {
+
+  var maxProfit = 0;
+  var mostProfitableCat = "";
+
+  for (var cat in catProfit) {
+    if (catProfit[cat] > maxProfit) {
+      maxProfit = catProfit[cat];
+      mostProfitableCat = cat;
+    }
+  }
+
+  var mostProfitableCategory = {
+    "description": "most Profitable Category",
+    "product": mostProfitableCat,
+    "prof": maxProfit
+  }
+
+  return mostProfitableCategory;
+}
