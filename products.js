@@ -77,12 +77,11 @@ exports.getLeastPopularProduct = function(weeklySales) {
 //  console.log(leastPopularProduct)
   return leastPopularProduct;
 };
-/////////////////////////////////////
+//////////////////////////////////////////
 exports.getCategories = function(filepath) {
 
   var inputCategories = fs.readFileSync(filepath, "utf8");
-  inputCategories = inputCategories.split('\n');
-
+  inputCategories = inputCategories.replace("Product,Category\n", "").split('\n');
   var categoriesArray = [];
 
   for (i = 0; i < inputCategories.length - 1; i++) {
@@ -104,7 +103,7 @@ exports.getCategories = function(filepath) {
 }
 
 exports.getCatSales = function(categories, weekly_sales) {
-
+//console.log(c)
   var catSales = {};
 
   for (var product in categories) {
@@ -135,9 +134,9 @@ exports.getMostPopularCategory = function(catSales) {
   }
 
   var mostPopularCategory = {
-    "description": "most Popular Category",
-    "product": category,
-    "quantity": mostCatSold
+    description: "Most Popular Category",
+    product: category,
+    quantity: mostCatSold
   }
 
   return mostPopularCategory;
@@ -145,7 +144,7 @@ exports.getMostPopularCategory = function(catSales) {
 
 exports.getLeastPopularCategory = function(catSales) {
 
-  var leastCatSold = 50;
+  var leastCatSold = 1000;
   var category = "";
 
   for (var cat in catSales) {
@@ -156,16 +155,170 @@ exports.getLeastPopularCategory = function(catSales) {
   }
 
   var leastPopularCategory = {
-    "description": "least Popular Category",
-    "product": category,
-    "quantity": leastCatSold
+    description: "Least Popular Category",
+    name: category,
+    quantity: leastCatSold
   }
-//console.log(leastPopularCategory);
+
   return leastPopularCategory;
 }
+/////////////////////////////////////////////////////////////
+exports.getPurchases = function(filepath) {
 
+  var inputPurchases = fs.readFileSync(filepath, "utf8")
+  .replace("Shop;Date;Item;Quantity;Cost;Total Cost\n", "")
+  .replace(/R/g, "")
+  .replace(/,/g, ".")
+  .replace(/ose (plastic)/g, "Rose (plastic)")
+  .split('\n');
+//console.log(inputPurchases)
+  var purchasesArray = [];
+
+  for (i = 0; i < inputPurchases.length - 1; i++) {
+    purchasesArray.push(inputPurchases[i].split(";"));
+  }
+
+  for (var i = purchasesArray.length - 1; i >= 0; i--) {
+    if (purchasesArray[i][1] === "01-Mar") {
+      purchasesArray.splice(i, 1);
+    }
+  }
+  var week0Purchases = [];
+  var week1Purchases = [];
+  var week2Purchases = [];
+  var week3Purchases = [];
+  var week4Purchases = [];
+  var weeklyPurchases = {};
+
+  for (i = 0; i < purchasesArray.length; i++) {
+    dt = purchasesArray[i][1];
+    var date = new Date(dt);
+
+    if (date.getMonth() === 0) {
+      week0Purchases.push(purchasesArray[i]);
+    }
+
+    if (date.getDate() < 8) {
+      week1Purchases.push(purchasesArray[i]);
+    }
+
+    if (date.getDate() > 7 && date.getDate() < 15) {
+      week2Purchases.push(purchasesArray[i]);
+    }
+
+    if (date.getDate() > 15 && date.getDate() < 22) {
+      week3Purchases.push(purchasesArray[i]);
+    }
+
+    if (date.getDate() > 21 && date.getDate() < 28 && date.getMonth() === 1) {
+      week4Purchases.push(purchasesArray[i]);
+    }
+  }
+
+  purchases = {
+    "week0": week0Purchases,
+    "week1": week1Purchases,
+    "week2": week2Purchases,
+    "week3": week3Purchases,
+    "week4": week4Purchases
+  };
+//console.log(purchases)
+  return purchases;
+};
+
+exports.getWeeklyPurchases = function(purchases, week) {
+
+  var purchasesList = [];
+
+  purchases[week].forEach(function(array) {
+    purchasesList.push([array[2], Number(array[4])]);
+  });
+
+  purchasesList.sort();
+
+  var weeklyPurchases = {};
+
+  purchasesList.forEach(function(array) {
+
+    if (!weeklyPurchases.hasOwnProperty(array[0])) {
+      weeklyPurchases[array[0]] = [array[1]];
+    } else {
+      weeklyPurchases[array[0]].push(array[1]);
+    }
+  });
+
+  return weeklyPurchases;
+};
+
+exports.getCostPrices = function(weeklyPurchases) {
+
+  var costPrices = {};
+
+  for (var fruit in weeklyPurchases) {
+    var total = 0;
+
+    weeklyPurchases[fruit].forEach(function(price) {
+      total += price;
+    });
+
+    var averageCost = Number((total / (weeklyPurchases[fruit].length)).toFixed(2));
+
+    costPrices[fruit] = averageCost;
+  }
+//console.log(costPrices);
+  return costPrices;
+}
+
+exports.getTotalProfit = function(costPrices, selling_prices, weekly_sales) {
+//console.log(selling_prices)
+  var profitMap = {};
+
+  for (var product in selling_prices) {
+    for (var products in costPrices) {
+      if (product === products) {
+        profitMap[product] = (selling_prices[product] - costPrices[products])
+      }
+    }
+  }
+
+  var totalProfit = {};
+
+  for (var product in profitMap) {
+    for (var products in weekly_sales) {
+      if (product === products) {
+        totalProfit[product] = Number((weekly_sales[products] * profitMap[product]).toFixed(2))
+      }
+    }
+  }
+
+  return totalProfit;
+}
+
+exports.getMostProfitableProduct = function(totalProfit) {
+
+  var profit = [];
+
+  for (var product in totalProfit) {
+    profit.push(totalProfit[product]);
+  }
+
+  var mostProfit = Math.max.apply(null, profit);
+
+  for (product in totalProfit) {
+    if (totalProfit[product] === mostProfit) {
+      var mostProfitableProduct = {
+        description : "Most Profitable Product",
+        product :  product,
+        profit: mostProfit
+      };
+    }
+  }
+
+  return mostProfitableProduct;
+}
+///////////////////////////////////////////////////////////////////
 exports.getCatProfit = function(categories, totalProfit) {
-
+//console.log(totalProfit);
   var catProfit = {};
 
   for (var product in categories) {
@@ -179,12 +332,12 @@ exports.getCatProfit = function(categories, totalProfit) {
       }
     }
   }
-
+//console.log(catProfit);
   return catProfit;
 }
 
 exports.getMostProfitableCategory = function(catProfit) {
-
+//console.log(catProfit);
   var maxProfit = 0;
   var mostProfitableCat = "";
 
@@ -196,10 +349,10 @@ exports.getMostProfitableCategory = function(catProfit) {
   }
 
   var mostProfitableCategory = {
-    "description": "most Profitable Category",
-    "product": mostProfitableCat,
-    "prof": maxProfit
+    description: "Most Profitable Category",
+    cat: mostProfitableCat,
+    profit: maxProfit
   }
-
+//console.log(mostProfitableCategory);
   return mostProfitableCategory;
 }
