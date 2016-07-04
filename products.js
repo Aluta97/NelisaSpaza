@@ -1,7 +1,6 @@
-
 var fs = require('fs');
 
-exports.salesList = function(filepath) {
+exports.getSalesList = function(filepath) {
 
   var inputSales = fs.readFileSync(filepath, "utf8");
   inputSales = inputSales.replace("Day,Date,stock item,No sold,Sales Price\n", "").split('\n');
@@ -49,7 +48,7 @@ exports.getMostPopularProduct = function(weeklySales) {
   }
 
   var mostPopularProduct = {
-    description: 'most popular product',
+    description: 'Most popular Product',
     product: mostPP,
     quantity: mostSold
   };
@@ -58,7 +57,7 @@ exports.getMostPopularProduct = function(weeklySales) {
 };
 
 exports.getLeastPopularProduct = function(weeklySales) {
-
+//console.log("weeklySales", weeklySales);
   var leastSold = 1000;
   var leastPP = "";
 
@@ -70,7 +69,7 @@ exports.getLeastPopularProduct = function(weeklySales) {
   }
 
   var leastPopularProduct = {
-    description: 'least popular product',
+    description: 'Least popular Product',
     product: leastPP,
     quantity: leastSold
   };
@@ -132,10 +131,9 @@ exports.getMostPopularCategory = function(catSales) {
       category = cat;
     }
   }
-
   var mostPopularCategory = {
-    description: "Most Popular Category",
-    product: category,
+    description: "Most popular Category",
+    product:  category,
     quantity: mostCatSold
   }
 
@@ -144,7 +142,7 @@ exports.getMostPopularCategory = function(catSales) {
 
 exports.getLeastPopularCategory = function(catSales) {
 
-  var leastCatSold = 1000;
+  var leastCatSold = Infinity;
   var category = "";
 
   for (var cat in catSales) {
@@ -153,13 +151,11 @@ exports.getLeastPopularCategory = function(catSales) {
       category = cat;
     }
   }
-
   var leastPopularCategory = {
-    description: "Least Popular Category",
-    name: category,
+    description: "Least popular Category",
+    product: category,
     quantity: leastCatSold
   }
-
   return leastPopularCategory;
 }
 /////////////////////////////////////////////////////////////
@@ -225,19 +221,19 @@ exports.getPurchases = function(filepath) {
 //console.log(purchases)
   return purchases;
 };
-
 exports.getWeeklyPurchases = function(purchases, week) {
-
+//console.log(week);
   var purchasesList = [];
-
+//console.log(purchases[week]);
   purchases[week].forEach(function(array) {
     purchasesList.push([array[2], Number(array[4])]);
   });
+// console.log(purchases[week]);
 
   purchasesList.sort();
 
   var weeklyPurchases = {};
-
+//console.log(purchasesList);
   purchasesList.forEach(function(array) {
 
     if (!weeklyPurchases.hasOwnProperty(array[0])) {
@@ -246,10 +242,9 @@ exports.getWeeklyPurchases = function(purchases, week) {
       weeklyPurchases[array[0]].push(array[1]);
     }
   });
-
+ //console.log("week", weeklyPurchases)
   return weeklyPurchases;
 };
-
 exports.getCostPrices = function(weeklyPurchases) {
 
   var costPrices = {};
@@ -268,11 +263,9 @@ exports.getCostPrices = function(weeklyPurchases) {
 //console.log(costPrices);
   return costPrices;
 }
-
 exports.getTotalProfit = function(costPrices, selling_prices, weekly_sales) {
-//console.log(selling_prices)
+//console.log("weekly_sales", weekly_sales);
   var profitMap = {};
-
   for (var product in selling_prices) {
     for (var products in costPrices) {
       if (product === products) {
@@ -290,12 +283,11 @@ exports.getTotalProfit = function(costPrices, selling_prices, weekly_sales) {
       }
     }
   }
-
+//console.log("totalProfit", profitMap);
   return totalProfit;
 }
 
 exports.getMostProfitableProduct = function(totalProfit) {
-
   var profit = [];
 
   for (var product in totalProfit) {
@@ -303,7 +295,7 @@ exports.getMostProfitableProduct = function(totalProfit) {
   }
 
   var mostProfit = Math.max.apply(null, profit);
-
+//console.log(mostProfit);
   for (product in totalProfit) {
     if (totalProfit[product] === mostProfit) {
       var mostProfitableProduct = {
@@ -313,7 +305,7 @@ exports.getMostProfitableProduct = function(totalProfit) {
       };
     }
   }
-
+console.log(mostProfitableProduct);
   return mostProfitableProduct;
 }
 ///////////////////////////////////////////////////////////////////
@@ -332,12 +324,9 @@ exports.getCatProfit = function(categories, totalProfit) {
       }
     }
   }
-//console.log(catProfit);
   return catProfit;
 }
-
 exports.getMostProfitableCategory = function(catProfit) {
-//console.log(catProfit);
   var maxProfit = 0;
   var mostProfitableCat = "";
 
@@ -347,12 +336,10 @@ exports.getMostProfitableCategory = function(catProfit) {
       mostProfitableCat = cat;
     }
   }
-
   var mostProfitableCategory = {
     description: "Most Profitable Category",
     cat: mostProfitableCat,
     profit: maxProfit
   }
-//console.log(mostProfitableCategory);
   return mostProfitableCategory;
 }

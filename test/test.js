@@ -1,35 +1,35 @@
 var assert = require('assert');
 var products = require('../products')
 
-var sales = products.salesList('./files/week1.csv');
+var sales = products.getSalesList('./files/week1.csv');
 var weekly_sales = products.getWeeklySales(sales);
 
 describe("products", function() {
 
   it('should return length of processed sales list of week1', function() {
-    assert.equal(104, products.salesList('./files/week1.csv').length);
+    assert.equal(104, products.getSalesList('./files/week1.csv').length);
   });
 
   it('should return length of processed sales list of week2', function() {
-    assert.equal(118, products.salesList('./files/week2.csv').length);
+    assert.equal(118, products.getSalesList('./files/week2.csv').length);
   });
 
   it('should return length of processed sales list of week3', function() {
-    assert.equal(105, products.salesList('./files/week3.csv').length);
+    assert.equal(105, products.getSalesList('./files/week3.csv').length);
   });
   it('should return length of processed sales list of week4', function() {
-    assert.equal(120, products.salesList('./files/week4.csv').length);
+    assert.equal(120, products.getSalesList('./files/week4.csv').length);
   });
   it('should return the most popular product sold for week1', function() {
     assert.deepEqual(products.getMostPopularProduct(weekly_sales), {
-      "description": 'most popular product',
+      "description": 'Most popular Product',
       "product": 'Coke 500ml',
       "quantity": 54
     });
   });
   it('should return the least popular product sold for week1', function() {
     assert.deepEqual(products.getLeastPopularProduct(weekly_sales), {
-      "description": 'least popular product',
+      "description": 'Least popular Product',
       "product": 'Shampoo 1 litre',
       "quantity": 3
     });
@@ -38,6 +38,7 @@ describe("products", function() {
 /////////////////////////////////////////////////
 
 var purchases = products.getPurchases('./files/purchases.csv');
+
 var weekly_purchases = products.getWeeklyPurchases(purchases, "week4");
 describe("Most popular product", function() {
 
@@ -228,37 +229,37 @@ describe("categories", function() {
     });
   });
 
-  it('should return the most popular category  and the quantity sold', function() {
+  it('should return the most popular category', function() {
     assert.deepEqual(products.getMostPopularCategory({
-      ' Dairy': 72,
-      ' Fruit': 45,
-      ' Bakery': 30,
-      ' Canned Food': 58,
-      ' Soft Drinks': 83,
-      ' Staples': 54,
-      ' Sweets': 28,
-      '   Toiletries': 29
+      ' Dairy': 39,
+      ' Fruit': 83,
+      ' Bakery': 45,
+      ' Canned Food': 40,
+      ' Soft Drinks': 109,
+      ' Staples': 39,
+      ' Sweets': 44,
+      ' Toiletries': 15
     }), {
-      description: 'Most Popular Category',
+      description: 'Most popular Category',
       product: ' Soft Drinks',
-      quantity: 83
+      quantity: 109
     });
   });
 
-  it('should return the least popular category  and the quantity sold', function() {
+  it('should return the least popular category', function() {
     assert.deepEqual(products.getLeastPopularCategory({
-      Dairy: 72,
-      Fruit: 45,
-      Bakery: 30,
-      'Canned Food': 58,
-      'Soft Drinks': 83,
-      Staples: 54,
-      Sweets: 28,
-      Toiletries: 29
+      ' Dairy': 39,
+      ' Fruit': 83,
+      ' Bakery': 45,
+      ' Canned Food': 40,
+      ' Soft Drinks': 109,
+      ' Staples': 39,
+      ' Sweets': 44,
+      ' Toiletries': 15
     }), {
-      description: 'Least Popular Category',
-      name: 'Sweets',
-      quantity: 28
+      description: 'Least popular Category',
+      product: ' Toiletries',
+      quantity: 15
     });
   });
 
