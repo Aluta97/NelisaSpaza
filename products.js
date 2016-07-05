@@ -174,11 +174,11 @@ exports.getPurchases = function(filepath) {
     purchasesArray.push(inputPurchases[i].split(";"));
   }
 
-  for (var i = purchasesArray.length - 1; i >= 0; i--) {
-    if (purchasesArray[i][1] === "01-Mar") {
-      purchasesArray.splice(i, 1);
-    }
-  }
+  // for (var i = purchasesArray.length - 1; i >= 0; i--) {
+  //   if (purchasesArray[i][1] === "01-Mar") {
+  //     purchasesArray.splice(i, 1);
+  //   }
+  // }
   var week0Purchases = [];
   var week1Purchases = [];
   var week2Purchases = [];
@@ -187,8 +187,8 @@ exports.getPurchases = function(filepath) {
   var weeklyPurchases = {};
 
   for (i = 0; i < purchasesArray.length; i++) {
-    dt = purchasesArray[i][1];
-    var date = new Date(dt);
+    newdate = purchasesArray[i][1];
+    var date = new Date(newdate);
 
     if (date.getMonth() === 0) {
       week0Purchases.push(purchasesArray[i]);
@@ -224,16 +224,15 @@ exports.getPurchases = function(filepath) {
 exports.getWeeklyPurchases = function(purchases, week) {
 //console.log(week);
   var purchasesList = [];
-//console.log(purchases[week]);
+
   purchases[week].forEach(function(array) {
     purchasesList.push([array[2], Number(array[4])]);
   });
-// console.log(purchases[week]);
-
+console.log(purchases[week]);
   purchasesList.sort();
 
   var weeklyPurchases = {};
-//console.log(purchasesList);
+
   purchasesList.forEach(function(array) {
 
     if (!weeklyPurchases.hasOwnProperty(array[0])) {
@@ -242,7 +241,6 @@ exports.getWeeklyPurchases = function(purchases, week) {
       weeklyPurchases[array[0]].push(array[1]);
     }
   });
- //console.log("week", weeklyPurchases)
   return weeklyPurchases;
 };
 exports.getCostPrices = function(weeklyPurchases) {
@@ -264,8 +262,9 @@ exports.getCostPrices = function(weeklyPurchases) {
   return costPrices;
 }
 exports.getTotalProfit = function(costPrices, selling_prices, weekly_sales) {
-//console.log("weekly_sales", weekly_sales);
+
   var profitMap = {};
+
   for (var product in selling_prices) {
     for (var products in costPrices) {
       if (product === products) {
@@ -283,7 +282,6 @@ exports.getTotalProfit = function(costPrices, selling_prices, weekly_sales) {
       }
     }
   }
-//console.log("totalProfit", profitMap);
   return totalProfit;
 }
 
