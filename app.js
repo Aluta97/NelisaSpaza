@@ -9,16 +9,17 @@ var getMostPopularProduct = products.getMostPopularProduct(weeklySales);
 var getLeastPopularProduct = products.getLeastPopularProduct(weeklySales);
 ////////////////////////////////////////////////////////////////
 var inputCategories = products.getCategories('./files/categories.csv')
-var catSales = products.getCatSales(inputCategories,weeklySales);
+var catSales = products.getCatSales(inputCategories, weeklySales);
 var getMostPopularCategory = products.getMostPopularCategory(catSales);
 var getLeastPopularCategory = products.getLeastPopularCategory(catSales);
 ///////////////////////////////////////////////////////
 var purchases = products.getPurchases('./files/purchases.csv');
+console.log(purchases);
 var weeklyPurchases = products.getWeeklyPurchases(purchases, week);
 var costPrices = products.getCostPrices(weeklyPurchases);
 var totalProfit = products.getTotalProfit(costPrices, selling_prices, weekly_sales);
-var most_profitable_product = products.getMostProfitableProduct(totalProfit);
-//console.log(totalProfit);
+var getMostProfitableProduct = products.getMostProfitableProduct(totalProfit);
+
 
 //var catProfit = categories.getCatProfit(categoryMap, totalProfit);
 //var getMostProfitableCategory = categories.getMostProfitableCategory(catProfit);
@@ -29,6 +30,8 @@ var source = fs.readFileSync('./index.handlebars', 'utf8');
 //create the template
 var template = handlebars.compile(source);
 //combine the source and the template
-var results = template({list:[getLeastPopularProduct, getMostPopularProduct, getLeastPopularCategory,getMostPopularCategory]});
+var results = template({
+  listOfProducts: [getLeastPopularProduct, getMostPopularProduct, getLeastPopularCategory, getMostPopularCategory]
+});
 //write your js file in the HTML.
 fs.writeFileSync('products.html', results);

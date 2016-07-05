@@ -44,7 +44,7 @@ describe("Most popular product", function() {
 
   it('should return the length of purchases for week1', function() {
     var result = purchases.week1.length;
-    assert.equal(result, 23);
+    assert.equal(result, 28);
   });
 
   it('should return the length of purchases for week3', function() {
@@ -203,16 +203,16 @@ describe("categories", function() {
       'Fanta 500ml': ' Soft Drinks',
       'Coke 500ml': ' Soft Drinks',
       'Cream Soda 500ml': ' Soft Drinks',
-      'Iwisa Pap 5kg': ' Staples',
-      'Top Class Soy Mince': ' Staples',
+      'Iwisa Pap 5kg': ' Starch',
+      'Top Class Soy Mince': ' Starch',
       'Shampoo 1 litre': ' Toiletries',
       'Soap Bar': ' Toiletries',
       'Bananas - loose': ' Fruit',
       'Apples - loose': ' Fruit',
       'Mixed Sweets 5s': ' Sweets',
       'Heart Chocolates': ' Sweets',
-      'Rose (plastic)': ' Stationery',
-      'Valentine Cards': ' Stationery',
+      'Rose (plastic)': ' Extras',
+      'Valentine Cards': ' Extras',
     });
   });
 
@@ -223,7 +223,7 @@ describe("categories", function() {
     ' Bakery': 45,
     ' Canned Food': 40,
     ' Soft Drinks': 109,
-    ' Staples': 39,
+    ' Starch': 39,
     ' Sweets': 44,
     ' Toiletries': 15
     });
@@ -236,7 +236,7 @@ describe("categories", function() {
       ' Bakery': 45,
       ' Canned Food': 40,
       ' Soft Drinks': 109,
-      ' Staples': 39,
+      ' Starch': 39,
       ' Sweets': 44,
       ' Toiletries': 15
     }), {
@@ -253,7 +253,7 @@ describe("categories", function() {
       ' Bakery': 45,
       ' Canned Food': 40,
       ' Soft Drinks': 109,
-      ' Staples': 39,
+      ' Starch': 39,
       ' Sweets': 44,
       ' Toiletries': 15
     }), {
@@ -286,7 +286,7 @@ describe("categories", function() {
       ' Bakery': 69.9,
       ' Canned Food': 150.14,
       ' Soft Drinks': 212.26,
-      ' Staples': 231,
+      ' Starch': 231,
       ' Sweets': 0,
       ' Toiletries': 157
     });
@@ -299,12 +299,12 @@ describe("categories", function() {
       ' Bakery': 69.9,
       ' Canned Food': 150.14,
       ' Soft Drinks': 212.26,
-      ' Stamples': 231,
+      ' Starch': 231,
       ' Sweets': 0,
       ' Toiletries': 157
     }), {
       description: 'Most Profitable Category',
-      cat: ' Stamples',
+      cat: ' Starch',
       profit: 231
     });
   });
