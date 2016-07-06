@@ -2,10 +2,15 @@ var assert = require('assert');
 var products = require('../products')
 
 var sales = products.getSalesList('./files/week1.csv');
+var sales2 = products.getSalesList('./files/week2.csv');
+var sales3 = products.getSalesList('./files/week3.csv');
+var sales4 = products.getSalesList('./files/week4.csv');
+
 var weekly_sales = products.getWeeklySales(sales);
-
+var weekly_sales2 = products.getWeeklySales(sales2);
+var weekly_sales3 = products.getWeeklySales(sales3);
+var weekly_sales4 = products.getWeeklySales(sales4);
 describe("products", function() {
-
   it('should return length of processed sales list of week1', function() {
     assert.equal(104, products.getSalesList('./files/week1.csv').length);
   });
@@ -20,40 +25,92 @@ describe("products", function() {
   it('should return length of processed sales list of week4', function() {
     assert.equal(120, products.getSalesList('./files/week4.csv').length);
   });
-  it('should return the most popular product sold for week1', function() {
-    assert.deepEqual(products.getMostPopularProduct(weekly_sales), {
-      "description": 'Most popular Product',
-      "product": 'Coke 500ml',
-      "quantity": 54
+
+    });
+
+  describe("most and least popular products", function(){
+    it('should return the most popular product sold for week1', function() {
+      assert.deepEqual(products.getMostPopularProduct(weekly_sales), {
+        description: 'Most popular Product',
+        product: 'Coke 500ml',
+        quantity: 54
+    })
+  })
+  it('should return the most popular product sold for week 2', function(){
+    assert.deepEqual(products.getMostPopularProduct(weekly_sales2),{
+      description: 'Most popular Product',
+      product: 'Mixed Sweets 5s',
+      quantity: 54
+    });
+  })
+  it('should return the most popular product sold for week 3', function(){
+    assert.deepEqual(products.getMostPopularProduct(weekly_sales3),{
+      description: 'Most popular Product',
+      product: 'Milk 1l',
+      quantity: 30
+    });
+  })
+  it('should return the most popular product sold for week 4', function(){
+    assert.deepEqual(products.getMostPopularProduct(weekly_sales4),{
+      description: 'Most popular Product',
+      product: 'Coke 500ml',
+      quantity: 45
+    });
+  })
+
+  it('should return the least popular product sold for week1', function() {
+    assert.deepEqual(products.getLeastPopularProduct(weekly_sales), {
+      description: 'Least popular Product',
+      product: 'Shampoo 1 litre',
+      quantity: 3
     });
   });
   it('should return the least popular product sold for week1', function() {
-    assert.deepEqual(products.getLeastPopularProduct(weekly_sales), {
-      "description": 'Least popular Product',
-      "product": 'Shampoo 1 litre',
-      "quantity": 3
+    assert.deepEqual(products.getLeastPopularProduct(weekly_sales2), {
+      description: 'Least popular Product',
+      product: 'Soap Bar',
+      quantity: 5
+    });
+  });
+  it('should return the least popular product sold for week1', function() {
+    assert.deepEqual(products.getLeastPopularProduct(weekly_sales3), {
+      description: 'Least popular Product',
+      product: 'Iwisa Pap 5kg',
+      quantity: 4
+    });
+  });
+  it('should return the least popular product sold for week1', function() {
+    assert.deepEqual(products.getLeastPopularProduct(weekly_sales4), {
+      description: 'Least popular Product',
+      product: 'Shampoo 1 litre',
+      quantity: 13
     });
   });
 });
 /////////////////////////////////////////////////
 
 var purchases = products.getPurchases('./files/purchases.csv');
-
 var weekly_purchases = products.getWeeklyPurchases(purchases, "week4");
-describe("Most popular product", function() {
-
+//console.log(weekly_purchases);
+describe("Most profitable product", function() {
   it('should return the length of purchases for week1', function() {
     var result = purchases.week1.length;
-    assert.equal(result, 28);
+    assert.equal(result, 23);
   });
-
+  it('should return the length of purchases for week2', function() {
+    var result = purchases.week2.length;
+    assert.equal(result, 30);
+  });
   it('should return the length of purchases for week3', function() {
     var result = purchases.week3.length;
     assert.equal(result, 32);
   });
-
-  it('should return the map of product and cost price for week4', function() {
-    var result = products.getWeeklyPurchases(purchases, "week4");
+  it('should return the length of purchases for week4', function() {
+    var result = purchases.week4.length;
+    assert.equal(result, 34);
+  });
+  it('should return the map of product and cost price for week 4', function() {
+    var result = products.getWeeklyPurchases(purchases, 'week4');
     assert.deepEqual(result, {
       'Imasi': [17, 17],
       'Apples - loose': [1.5, 1.5],
@@ -76,7 +133,26 @@ describe("Most popular product", function() {
   it('should return cost price map for week4', function() {
     var result = products.getCostPrices(weekly_purchases);
     assert.deepEqual(result, {
-
+      'Apples - loose': 1.5,
+      'Bananas - loose': 1,
+      Bread: 9.67,
+      'Chakalaka Can': 7.67,
+      'Coke 500ml': 3.5,
+      'Cream Soda 500ml': 4.5,
+      'Fanta 500ml': 5.17,
+      'Gold Dish Vegetable Curry Can': 6.17,
+      Imasi: 17,
+      'Iwisa Pap 5kg': 25,
+      'Milk 1l': 7,
+      'Mixed Sweets 5s': 3,
+      'Shampoo 1 litre': 20,
+      'Soap Bar': 3,
+      'Top Class Soy Mince': 8
+    });
+  });
+  it('should return cost price map for week4', function() {
+    var result = products.getCostPrices(weekly_purchases);
+    assert.deepEqual(result, {
       'Apples - loose': 1.5,
       'Bananas - loose': 1,
       Bread: 9.67,
@@ -189,7 +265,7 @@ describe("Most popular product", function() {
 
 });
 ////////////////////////////////////////////////
-var category_map = products.getCategories('./files/categories.csv');
+var categoryMap = products.getCategories('./files/categories.csv');
 
 describe("categories", function() {
 
@@ -217,7 +293,7 @@ describe("categories", function() {
   });
 
   it('should return a map of categories sales', function() {
-    assert.deepEqual(products.getCatSales(category_map, weekly_sales), {
+    assert.deepEqual(products.getCatSales(categoryMap, weekly_sales), {
     ' Dairy': 39,
     ' Fruit': 83,
     ' Bakery': 45,
@@ -264,7 +340,7 @@ describe("categories", function() {
   });
 
   it('should return a categories profit map', function() {
-    assert.deepEqual(products.getCatProfit(category_map, {
+    assert.deepEqual(products.getCatProfit(categoryMap, {
       Amasi: 248,
       'Apples - loose': 13.5,
       'Bananas - loose': 18,

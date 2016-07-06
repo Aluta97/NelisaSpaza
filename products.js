@@ -102,7 +102,7 @@ exports.getCategories = function(filepath) {
 }
 
 exports.getCatSales = function(categories, weekly_sales) {
-//console.log(c)
+
   var catSales = {};
 
   for (var product in categories) {
@@ -174,11 +174,11 @@ exports.getPurchases = function(filepath) {
     purchasesArray.push(inputPurchases[i].split(";"));
   }
 
-  // for (var i = purchasesArray.length - 1; i >= 0; i--) {
-  //   if (purchasesArray[i][1] === "01-Mar") {
-  //     purchasesArray.splice(i, 1);
-  //   }
-  // }
+  for (var i = purchasesArray.length - 1; i >= 0; i--) {
+    if (purchasesArray[i][1] === "01-Mar") {
+      purchasesArray.splice(i, 1);
+    }
+  }
   var week0Purchases = [];
   var week1Purchases = [];
   var week2Purchases = [];
@@ -228,9 +228,9 @@ exports.getWeeklyPurchases = function(purchases, week) {
   purchases[week].forEach(function(array) {
     purchasesList.push([array[2], Number(array[4])]);
   });
-console.log(purchases[week]);
+//console.log(purchases[week]);
   purchasesList.sort();
-
+//console.log(purchasesList);
   var weeklyPurchases = {};
 
   purchasesList.forEach(function(array) {
@@ -241,6 +241,7 @@ console.log(purchases[week]);
       weeklyPurchases[array[0]].push(array[1]);
     }
   });
+  //console.log(weeklyPurchases);
   return weeklyPurchases;
 };
 exports.getCostPrices = function(weeklyPurchases) {
@@ -308,7 +309,7 @@ console.log(mostProfitableProduct);
 }
 ///////////////////////////////////////////////////////////////////
 exports.getCatProfit = function(categories, totalProfit) {
-//console.log(totalProfit);
+
   var catProfit = {};
 
   for (var product in categories) {

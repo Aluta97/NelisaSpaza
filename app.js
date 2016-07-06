@@ -14,15 +14,15 @@ var getMostPopularCategory = products.getMostPopularCategory(catSales);
 var getLeastPopularCategory = products.getLeastPopularCategory(catSales);
 ///////////////////////////////////////////////////////
 var purchases = products.getPurchases('./files/purchases.csv');
-console.log(purchases);
-var weeklyPurchases = products.getWeeklyPurchases(purchases, week);
-var costPrices = products.getCostPrices(weeklyPurchases);
-var totalProfit = products.getTotalProfit(costPrices, selling_prices, weekly_sales);
-var getMostProfitableProduct = products.getMostProfitableProduct(totalProfit);
+// var weeklyPurchases = products.getWeeklyPurchases(purchases, week);
+// console.log(weeklyPurchases);
+// var costPrices = products.getCostPrices(weeklyPurchases);
+// var totalProfit = products.getTotalProfit(costPrices, selling_prices, weekly_sales);
+// var getMostProfitableProduct = products.getMostProfitableProduct(totalProfit);
 
 
-//var catProfit = categories.getCatProfit(categoryMap, totalProfit);
-//var getMostProfitableCategory = categories.getMostProfitableCategory(catProfit);
+//var catProfit = products.getCatProfit(categoryMap, totalProfit);
+//var getMostProfitableCategory = products.getMostProfitableCategory(catProfit);
 
 
 //introducing my handlebar template
@@ -34,4 +34,4 @@ var results = template({
   listOfProducts: [getLeastPopularProduct, getMostPopularProduct, getLeastPopularCategory, getMostPopularCategory]
 });
 //write your js file in the HTML.
-fs.writeFileSync('products.html', results);
+fs.writeFileSync('week1.html', results);
