@@ -225,7 +225,6 @@ exports.getMostProfitableProduct = function(totalProfit) {
       };
     }
   }
-//console.log(mostProfitableProduct);
   return mostProfitableProduct;
 }
 ///////////////////////////////////////////////////////////////////
