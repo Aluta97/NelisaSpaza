@@ -77,87 +77,7 @@ exports.getLeastPopularProduct = function(weeklySales) {
   return leastPopularProduct;
 };
 //////////////////////////////////////////
-exports.getCategories = function(filepath) {
 
-  var inputCategories = fs.readFileSync(filepath, "utf8");
-  inputCategories = inputCategories.replace("Product,Category\n", "").split('\n');
-  var categoriesArray = [];
-
-  for (i = 0; i < inputCategories.length - 1; i++) {
-    categoriesArray.push(inputCategories[i].split(","));
-  }
-
-  categoriesArray.sort();
-
-  var categories = {};
-
-  categoriesArray.forEach(function(array) {
-    if (!categories.hasOwnProperty(array[0])) {
-      categories[array[0]] = array[1];
-    }
-  })
-
-  return categories;
-
-}
-
-exports.getCatSales = function(categories, weekly_sales) {
-
-  var catSales = {};
-
-  for (var product in categories) {
-    for (var products in weekly_sales) {
-      if (product === products) {
-        if (!catSales.hasOwnProperty(categories[product])) {
-          catSales[categories[product]] = weekly_sales[products];
-        } else {
-          catSales[categories[product]] += weekly_sales[products];
-        }
-      }
-    }
-  }
-
-  return catSales;
-}
-
-exports.getMostPopularCategory = function(catSales) {
-
-  var mostCatSold = 0;
-  var category = "";
-
-  for (var cat in catSales) {
-    if (catSales[cat] > mostCatSold) {
-      mostCatSold = catSales[cat];
-      category = cat;
-    }
-  }
-  var mostPopularCategory = {
-    description: "Most popular Category",
-    product:  category,
-    quantity: mostCatSold
-  }
-
-  return mostPopularCategory;
-}
-
-exports.getLeastPopularCategory = function(catSales) {
-
-  var leastCatSold = Infinity;
-  var category = "";
-
-  for (var cat in catSales) {
-    if (catSales[cat] < leastCatSold) {
-      leastCatSold = catSales[cat];
-      category = cat;
-    }
-  }
-  var leastPopularCategory = {
-    description: "Least popular Category",
-    product: category,
-    quantity: leastCatSold
-  }
-  return leastPopularCategory;
-}
 /////////////////////////////////////////////////////////////
 exports.getPurchases = function(filepath) {
 
@@ -263,6 +183,7 @@ exports.getCostPrices = function(weeklyPurchases) {
   return costPrices;
 }
 exports.getTotalProfit = function(costPrices, selling_prices, weekly_sales) {
+//  console.log(selling_prices);
 
   var profitMap = {};
 
@@ -304,10 +225,95 @@ exports.getMostProfitableProduct = function(totalProfit) {
       };
     }
   }
-console.log(mostProfitableProduct);
+//console.log(mostProfitableProduct);
   return mostProfitableProduct;
 }
 ///////////////////////////////////////////////////////////////////
+
+exports.getCategories = function(filepath) {
+
+  var inputCategories = fs.readFileSync(filepath, "utf8");
+  inputCategories = inputCategories.split('\n');
+//  console.log(inputCategories);
+
+  var categoriesArray = [];
+
+  for (i = 0; i < inputCategories.length - 1; i++) {
+    categoriesArray.push(inputCategories[i].split(","));
+  }
+
+  categoriesArray.sort();
+
+  var categories = {};
+
+  categoriesArray.forEach(function(array) {
+    if (!categories.hasOwnProperty(array[0])) {
+      categories[array[0]] = array[1];
+    }
+  })
+
+  return categories;
+
+}
+
+exports.getCatSales = function(categories, weekly_sales) {
+
+  var catSales = {};
+
+  for (var product in categories) {
+    for (var products in weekly_sales) {
+      if (product === products) {
+        if (!catSales.hasOwnProperty(categories[product])) {
+          catSales[categories[product]] = weekly_sales[products];
+        } else {
+          catSales[categories[product]] += weekly_sales[products];
+        }
+      }
+    }
+  }
+
+  return catSales;
+}
+
+exports.getMostPopularCategory = function(catSales) {
+
+  var mostCatSold = 0;
+  var category = "";
+
+  for (var cat in catSales) {
+    if (catSales[cat] > mostCatSold) {
+      mostCatSold = catSales[cat];
+      category = cat;
+    }
+  }
+  var mostPopularCategory = {
+    description: "Most popular Category",
+    product:  category,
+    quantity: mostCatSold
+  }
+
+  return mostPopularCategory;
+}
+
+exports.getLeastPopularCategory = function(catSales) {
+
+  var leastCatSold = Infinity;
+  var category = "";
+
+  for (var cat in catSales) {
+    if (catSales[cat] < leastCatSold) {
+      leastCatSold = catSales[cat];
+      category = cat;
+    }
+  }
+  var leastPopularCategory = {
+    description: "Least popular Category",
+    product: category,
+    quantity: leastCatSold
+  }
+  return leastPopularCategory;
+}
+
 exports.getCatProfit = function(categories, totalProfit) {
 
   var catProfit = {};
