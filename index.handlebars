@@ -8,7 +8,10 @@
 </head>
 <body>
   {{#listOfProducts}}
-  <p> The {{description}} is {{product}}{{cat}} : {{quantity}}{{profit}} </p>
+  <p> The {{description}} is {{product}} : {{quantity}} </p>
   {{/listOfProducts}}
+  {{#listOfProfitable}}
+  <p> The {{description}} is {{product}}{{cat}} : R{{profit}} </p>
+  {{/listOfProfitable}}
 </body>
 </html>
