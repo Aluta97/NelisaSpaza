@@ -1,14 +1,15 @@
 var fs = require('fs');
 var handlebars = require('handlebars');
 var products = require('./products');
-
-var categories = require('./files/categories.json')
-var sellingPrices = require('./files/sales.json')
-//get the data
+var categories = require('./files/categories.json');
+var sellingPrices = require('./files/sales.json');
 //pass the procees argument so you wont have to repeat yourself
 var week = process.argv[2];
-
-var inputSales = products.getSalesList('./files/'+ week +'.csv');
+//create a function that gets all my data
+var weekStats = function(){
+}
+//get the data
+var inputSales = products.getSalesList('./files/' + week +'.csv');
 var weeklySales = products.getWeeklySales(inputSales);
 var mostPopularProduct = products.getMostPopularProduct(weeklySales);
 var leastPopularProduct = products.getLeastPopularProduct(weeklySales);
@@ -25,6 +26,7 @@ var totalProfit = products.getTotalProfit(costPrices, sellingPrices, weeklySales
 var mostProfitableProduct = products.getMostProfitableProduct(totalProfit);
 var catProfit = products.getCatProfit(categories ,totalProfit);
 var mostProfitableCategory = products.getMostProfitableCategory(catProfit);
+
 //introducing my handlebar template
 var source = fs.readFileSync('./index.handlebars', 'utf8');
 //create the template
