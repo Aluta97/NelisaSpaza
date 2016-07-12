@@ -201,7 +201,6 @@ describe("Most profitable product", function() {
       profit : 248
     });
   });
-
 });
 ////////////////////////////////////////////////
 var categoryMap = products.getCategories('./files/categories.csv');

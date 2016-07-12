@@ -228,7 +228,6 @@ exports.getMostProfitableProduct = function(totalProfit) {
   return mostProfitableProduct;
 }
 ///////////////////////////////////////////////////////////////////
-
 exports.getCategories = function(filepath) {
 
   var inputCategories = fs.readFileSync(filepath, "utf8");
