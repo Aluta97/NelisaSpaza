@@ -7,16 +7,17 @@
   <title>Handlebars</title>
 </head>
 <body>
-  <a href ="./week1.html">week 1</a>
-  <a href ="./week2.html">week 2</a>
-  <a href ="./week3.html">week 3</a>
-  <a href ="./week4.html">week 4</a>
-  
+
   {{#listOfProducts}}
   <p> The {{description}} is {{product}} : {{quantity}} </p>
   {{/listOfProducts}}
   {{#listOfProfitable}}
   <p> The {{description}} is {{product}}{{cat}} : R{{profit}} </p>
   {{/listOfProfitable}}
+
+  <a href ="week1.html">Week 1</a>
+  <a href ="week2.html">Week 2</a>
+  <a href ="week3.html">Week 3</a>
+  <a href ="week4.html">Week 4</a>
 </body>
 </html>
