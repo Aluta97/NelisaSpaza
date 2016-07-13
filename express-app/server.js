@@ -1,19 +1,18 @@
 var express = require('express');
 var app = express();
+var myApp_js = require('../app');
 
-app.get('/testing', function (req, res){
-  res.send('new route')
-})
-
-  // create a test route
-  app.get('/test', function (req, res) {
-   res.send('I am learning how to create a route');
-  });
+//Creating a route for my app.js
+app.get('/sales/:week_name', function(req, res){
+  var week_name = req.params.week_name
+  res.send(myApp_js.weeklyStats(week_name));
+});
 
 // create a route
 app.get('/', function (req, res) {
  res.send('Hello World!');
 });
+
 app.get('/hello', function (req, res) {
  res.send('Hello codeX!');
 });
