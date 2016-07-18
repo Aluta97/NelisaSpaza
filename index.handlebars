@@ -1,19 +1,54 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 
-<h1>Nelisa Spaza</h1>
+  <h1>Nelisa Spaza</h1>
 
-  <title>Handlebars</title>
+  <title>Nelisa Spaza Shop</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+  <style>
+    h1 {
+      height: 100px;
+      font-size: 80px;
+      text-align: center;
+      background-color: lightblue;
+    }
+
+    body {
+      text-align: center;
+      font-size: 20px;
+      border: 1px solid blue;
+      height: 100px;
+    }
+
+    div {
+      background-color: lightgreen;
+      padding: 50px;
+      border: 1px solid red;
+      box-sizing: border-box;
+      border-radius: 5px;
+    }
+  </style>
+
 </head>
-<body>
 
-  {{#listOfProducts}}
-  <p> The {{description}} is {{product}} : {{quantity}} </p>
-  {{/listOfProducts}}
-  {{#listOfProfitable}}
-  <p> The {{description}} is {{product}}{{cat}} : R{{profit}} </p>
-  {{/listOfProfitable}}
+<div>
 
-</body>
+  <body>
+    {{#listOfProducts}}
+      <p> The {{description}} is {{product}} : {{quantity}} </p>
+    {{/listOfProducts}}
+    {{#listOfProfitable}}
+      <p> The {{description}} is {{product}}{{cat}} : R{{profit}} </p>
+    {{/listOfProfitable}}
+  </body>
+
+</div>
+
 </html>

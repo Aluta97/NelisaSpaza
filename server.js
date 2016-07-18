@@ -26,3 +26,10 @@ var server = app.listen(3000, function () {
 //console.log('Example app listening at http://%s:%s', host, port);
 
 });
+
+// //set the port number to an existing environment variable PORT or default to 5000
+// app.set('port', (process.env.PORT || 5000));
+// //start the app like this:
+// app.listen(app.get('port'), function() {
+//   console.log('Node app is running on port', app.get('port'));
+// });
