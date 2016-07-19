@@ -1,14 +1,26 @@
 {
   "name": "express-app",
   "version": "0.0.0",
-  "description": "",
+  "description": "Helping Nelisa to manage her store and see how much profit she makes.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
-  "author": "",
+  "author": "Lusindiso Mkiva",
   "license": "BSD-2-Clause",
   "dependencies": {
     "express": "~4.14.0"
+  },
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Aluta97/NelisaSpaza.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Aluta97/NelisaSpaza/issues"
   }
 }

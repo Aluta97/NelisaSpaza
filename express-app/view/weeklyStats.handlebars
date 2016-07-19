@@ -1,0 +1,31 @@
+<div class="container">
+  <h2>Weekly Sales</h2>
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Product</th>
+        <th>Quantity</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#listOfProducts}}
+        <tr>
+          <td>{{description}}</td>
+          <td>{{product}}</td>
+          <td>{{quantity}}</td>
+        </tr>
+      {{/listOfProducts}}
+
+      {{#listOfProfitable}}
+        <tr>
+          <td>{{description}}</td>
+          <td>{{product}} {{cat}}</td>
+          <td>R{{profit}}</td>
+        </tr>
+      {{/listOfProfitable}}
+
+    </tbody>
+  </table>
+</div>
