@@ -13,16 +13,18 @@
 </head>
 
 <style>
+  h1 {
+    text-align: center;
+  }
+
   div {
     width: 30px;
     background-color: lightgreen;
-    padding: 50px;
-    border: 1px solid red;
-    box-sizing: border-box;
-    border-radius: 5px;
+    padding: 100px;
+    text-align: center;
   }
 
-  h1 {
+  img {
     text-align: center;
   }
 
@@ -30,48 +32,50 @@
     border-spacing: 10px;
     background-color: #eee;
   }
-
 </style>
+
+<ul class="nav nav-pills">
+  <li role="presentation" class="active"><a href="">week1</a></li>
+  <li role="presentation"><a href="#">week2</a></li>
+  <li role="presentation"><a href="#">week3</a></li>
+  <li role="presentation"><a href="#">week3</a></li>
+</ul>
 
 <body>
 
   <h1>Nelisa Spaza Shop</h1>
 
-  <img src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcRxO_NOMpk267gZU4JiToagl8EYIZF8YTXHt0isDMh9Wqkh08ohxw">
+  <div class="container">
+    <h2>Weekly Sales</h2>
 
-
-
-<div class="container">
-  <h2>Weekly Sales</h2>
-
-  <table class="table table-bordered">
-    <thead>
-      <tr>
-        <th>Description</th>
-        <th>Product</th>
-        <th>Quantity</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#listOfProducts}}
+    <table class="table table-bordered">
+      <thead>
         <tr>
-          <td>{{description}}</td>
-          <td>{{product}}</td>
-          <td>{{quantity}}</td>
+          <th>Description</th>
+          <th>Product</th>
+          <th>Quantity</th>
         </tr>
-      {{/listOfProducts}}
+      </thead>
+      <tbody>
+        {{#listOfProducts}}
+          <tr>
+            <td>{{description}}</td>
+            <td>{{product}}</td>
+            <td>{{quantity}}</td>
+          </tr>
+        {{/listOfProducts}}
 
-      {{#listOfProfitable}}
-        <tr>
-          <td>{{description}}</td>
-          <td>{{product}} {{cat}}</td>
-          <td>R{{profit}}</td>
-        </tr>
-      {{/listOfProfitable}}
+        {{#listOfProfitable}}
+          <tr>
+            <td>{{description}}</td>
+            <td>{{product}} {{cat}}</td>
+            <td>R{{profit}}</td>
+          </tr>
+        {{/listOfProfitable}}
 
-    </tbody>
-  </table>
-</div>
+      </tbody>
+    </table>
+  </div>
 
 </body>
 
