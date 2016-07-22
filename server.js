@@ -11,7 +11,6 @@ app.get('/sales/:week_name', function(req, res){
 
 // create a route
 
-
 // app.get('/', function (req, res) {
 //     res.render('home');
 // });
