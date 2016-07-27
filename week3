@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>Nelisa Spaza Shop</title>
+
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <!-- Latest compiled and minified JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+</head>
+
+<style>
+  h1 {
+    text-align: center;
+  }
+
+  div {
+    width: 30px;
+    background-color: lightgreen;
+    padding: 100px;
+    text-align: center;
+  }
+
+  img {
+    text-align: center;
+  }
+
+  table {
+    border-spacing: 10px;
+    background-color: #eee;
+  }
+</style>
+
+<ul class="nav nav-pills">
+  <li role="presentation"><a href="week1.html">week1</a></li>
+  <li role="presentation"><a href="week2.html">week2</a></li>
+  <li role="presentation"><a href="week3.html">week3</a></li>
+  <li role="presentation"><a href="week4.html">week3</a></li>
+</ul>
+
+<body>
+
+  <h1>Nelisa Spaza Shop</h1>
+
+  <div class="container">
+    <h2>Weekly Sales</h2>
+
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Description</th>
+          <th>Product</th>
+          <th>Quantity</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr>
+            <td>Most popular Product</td>
+            <td>Milk 1l</td>
+            <td>30</td>
+          </tr>
+          <tr>
+            <td>Least popular Product</td>
+            <td>Iwisa Pap 5kg</td>
+            <td>4</td>
+          </tr>
+          <tr>
+            <td>Least popular Category</td>
+            <td> Toiletries</td>
+            <td>12</td>
+          </tr>
+          <tr>
+            <td>Most popular Category</td>
+            <td> Soft Drinks</td>
+            <td>44</td>
+          </tr>
+
+          <tr>
+            <td>Most Profitable Product</td>
+            <td>Bread </td>
+            <td>R72</td>
+          </tr>
+          <tr>
+            <td>Most Profitable Category</td>
+            <td>  Soft Drinks</td>
+            <td>R86</td>
+          </tr>
+
+      </tbody>
+    </table>
+  </div>
+
+</body>
+
+
+</html>
