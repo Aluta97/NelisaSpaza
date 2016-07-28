@@ -7,8 +7,6 @@ var sellingPrices = require('./files/sales.json');
  //create a function that gets all my data
  exports.weeklyStats = function(week){
    //get the data
-
-
   var inputSales = products.getSalesList('./files/' + week +'.csv');
 
   var weeklySales = products.getWeeklySales(inputSales);
