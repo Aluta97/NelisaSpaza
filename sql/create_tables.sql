@@ -7,8 +7,7 @@ create table IF NOT EXISTS categories(
 
 create table IF NOT EXISTS products (
     id int primary key auto_increment,
-        description char(100) not null,
-    price decimal(10,2),
+    description char(100) not null,
     category_id int,
     foreign key (category_id) references categories(id)
 );
