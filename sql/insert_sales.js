@@ -9,5 +9,8 @@ var conn = mysql.createConnection({
   });
 
   //getting the products from the other file
- conn.query('SELECT * FROM products', function(err, categories){
+ conn.query('SELECT * FROM products', function(err, products){
    if(err) throw err;
+console.log(products);
+
+});
