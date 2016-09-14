@@ -44,9 +44,8 @@ conn.query('SELECT * FROM categories', function(err, categories){
           //console.log(data);
             prod.push(data[2])
    }
-//   console.log(prod);
 
-//creating the ID cat map
+//creating the cat_id map
    categories.forEach(function(category){
      //console.log(category);
      map[category.category] = category.id;
@@ -64,7 +63,7 @@ conn.query('SELECT * FROM categories', function(err, categories){
         var category_id = map[category];
 
      }
-     
+
      values.push([description,category_id])
 
    }
