@@ -14,7 +14,6 @@ create table IF NOT EXISTS products (
 
 create table IF NOT EXISTS sales (
     id int primary key auto_increment,
-    product varchar(100),
     quantity decimal (10.2),
     selling_prices decimal (10.2),
     selling_date date,

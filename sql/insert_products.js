@@ -67,7 +67,7 @@ conn.query('SELECT * FROM categories', function(err, categories){
      values.push([description,category_id])
 
    }
-   console.log(values);
+//     console.log(values);
    var sql = 'insert into products(description, category_id) VALUES ?';
    conn.query(sql,[values],function(err){
      if(err) throw err

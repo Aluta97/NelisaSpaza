@@ -14,32 +14,39 @@ var conn = mysql.createConnection({
 //console.log(products);
 
 var prod = [];
+var map = {};
 
-var files = fs.readFileSync('../files/week1.csv', 'utf8').split('\n');
+var files = fs.readFileSync('../files/week1.csv', 'utf8')
+            .split('\n');
   for(var i = 0; i < files.length -1; i++){
          var data = files[i].split(',');
-        // console.log(data);
+      // console.log(data);
          prod.push(data)
   }
 
-    var sales = [];
+  //creating the prod_id map
+     products.forEach(function(description){
+      // console.log(product);
+       map[description.products] = products.id;
+     })
+      console.log(map);
 
+//    var sales = [];
 
-  // prod.forEach(function(item){
+  // for(var i = 0; i < prod.length; i++){
+  //   prod[i] = prod[i]
+  //
+  //     var date = prod[i][1];
+  //     var no_sold = prod[i][3];
+  //     var price = prod[i][4];
+  //
+  //   }
 
-  for(var i = 0; i < prod.length; i++){
-    prod[i] = prod[i],
-
-    sales.push(
-
-      var date = prod[i][1],
-      var no_sold = prod[i][3],
-      var price = prod[i][4]
-
-})
-    }
-
-
+    // var sql = 'insert into sales(`id`, `date`, `product_id`, `no_sold`, `price`) VALUES ?';
+    // conn.query(sql,[values],function(err){
+    //   if(err) throw err
+    //   conn.end();
+    // })
 
 
 
