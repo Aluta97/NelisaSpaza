@@ -20,34 +20,37 @@ var files = fs.readFileSync('../files/week1.csv', 'utf8')
             .split('\n');
   for(var i = 0; i < files.length -1; i++){
          var data = files[i].split(',');
-      // console.log(data);
          prod.push(data)
   }
 
   //creating the prod_id map
-     products.forEach(function(description){
-      // console.log(product);
-       map[description.products] = products.id;
+     products.forEach(function(product){
+       map[product.description] = product.id;
      })
-      console.log(map);
+    //  console.log(map);
 
-//    var sales = [];
+    var values = [];
 
-  // for(var i = 0; i < prod.length; i++){
-  //   prod[i] = prod[i]
-  //
-  //     var date = prod[i][1];
-  //     var no_sold = prod[i][3];
-  //     var price = prod[i][4];
-  //
-  //   }
+  for(var i = 0; i < prod.length; i++){
+    for(key in map){
 
-    // var sql = 'insert into sales(`id`, `date`, `product_id`, `no_sold`, `price`) VALUES ?';
+ var selling_date = prod[i][1] + 2016;
+  //console.log(selling_date);
+    var quantity = prod[i][3];
+  //  console.log(quantity);
+      var selling_prices = prod[i][4];
+        var prod_id = map[key];
+        //  console.log(prod_id);
+     }
+
+     values.push([quantity, selling_prices, selling_date, prod_id])
+     console.log(values);
+
+}
+    // var sql = 'insert into sales(quantity, selling_prices, selling_date, prod_id) VALUES ?';
     // conn.query(sql,[values],function(err){
     //   if(err) throw err
     //   conn.end();
     // })
-
-
 
 });

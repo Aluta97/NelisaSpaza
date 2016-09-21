@@ -23,15 +23,16 @@ conn.query('SELECT * FROM categories', function(err, categories){
   'Coke 500ml': 'Soft Drinks',
   'Cream Soda 500ml': 'Soft Drinks',
   'Iwisa Pap 5kg': 'Starch',
-  'Top Class Soy Mince':'Starch',
+  'Top Class Soy Mince': 'Starch',
   'Shampoo 1 litre': 'Toiletries',
   'Soap Bar': 'Toiletries',
   'Bananas - loose': 'Fruit',
   'Apples - loose': 'Fruit',
   'Mixed Sweets 5s': 'Sweets',
   'Heart Chocolates': 'Sweets',
+  'Valentine Cards': 'Extras',
   'Rose (plastic)': 'Extras',
-  'Valentine Cards': 'Extras'
+
 }
 
  var prod = [];
@@ -41,36 +42,39 @@ conn.query('SELECT * FROM categories', function(err, categories){
  var files = fs.readFileSync('../files/week2.csv', 'utf8').split('\n');
    for(var i = 0; i < files.length -1; i++){
           var data = files[i].split(',');
-          //console.log(data);
+        //  console.log(data);
             prod.push(data[2])
    }
+          //console.log(prod);
 
 //creating the cat_id map
    categories.forEach(function(category){
      //console.log(category);
      map[category.category] = category.id;
    })
-    // console.log(map);
+    //  console.log(map);
 
    var values = [];
 
-   for(var i=0; i < prod.length; i ++){
-     for( key in map){
+   for(var i = 0; i < prod.length; i++){
+     for(key in map){
 //console.log("================");
 
      var description = prod[i];
-      var category = productCats[description];
+        console.log(description);
+       var category = productCats[description];
+          //console.log(category);
         var category_id = map[category];
-
+          //   console.log(category_id);
      }
 
      values.push([description,category_id])
 
    }
 //     console.log(values);
-   var sql = 'insert into products(description, category_id) VALUES ?';
-   conn.query(sql,[values],function(err){
-     if(err) throw err
-     conn.end();
-   })
+  //  var sql = 'insert into products(description, category_id) VALUES ?';
+  //  conn.query(sql,[values],function(err){
+  //    if(err) throw err
+  //    conn.end();
+  //  })
 });
