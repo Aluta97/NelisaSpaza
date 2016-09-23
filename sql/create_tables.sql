@@ -1,5 +1,10 @@
 use nelisa;
 
+-- drop table if exist in categories;
+-- drop table if exist in products;
+-- drop table if exist in sales;
+-- drop table if exist in purchases;
+
 create table IF NOT EXISTS categories(
     id int primary key auto_increment,
     category char(100) not null
@@ -14,9 +19,9 @@ create table IF NOT EXISTS products (
 
 create table IF NOT EXISTS sales (
     id int primary key auto_increment,
+    selling_date char(100) not null,
     quantity decimal (10.2),
-    selling_prices decimal (10.2),
-    selling_date date,
+    selling_prices char(100) not null,
     prod_id int,
     foreign key (prod_id) references products(id)
 );

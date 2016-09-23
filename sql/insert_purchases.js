@@ -33,7 +33,7 @@ var map = {};
 
 
         for(var i = 0; i < purchases.length; i++){
-           purchases[i] = purchases[i];
+          purchases[i] = purchases[i];
 
             var shop = purchases[i][0];
               console.log(shop);

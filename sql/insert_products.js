@@ -45,36 +45,36 @@ conn.query('SELECT * FROM categories', function(err, categories){
         //  console.log(data);
             prod.push(data[2])
    }
-          //console.log(prod);
 
 //creating the cat_id map
    categories.forEach(function(category){
      //console.log(category);
      map[category.category] = category.id;
    })
-    //  console.log(map);
-
+    // console.log(map);
    var values = [];
+   var newMap = {};
 
    for(var i = 0; i < prod.length; i++){
-     for(key in map){
-//console.log("================");
-
      var description = prod[i];
-        console.log(description);
        var category = productCats[description];
-          //console.log(category);
         var category_id = map[category];
-          //   console.log(category_id);
-     }
 
-     values.push([description,category_id])
-
+// create an if satement to make sure you dont sure you dont repeat the same products
+      if(newMap[description] === undefined){
+          newMap[description] = 0;
+        }
+          newMap[description] = category_id;
    }
-//     console.log(values);
-  //  var sql = 'insert into products(description, category_id) VALUES ?';
-  //  conn.query(sql,[values],function(err){
-  //    if(err) throw err
-  //    conn.end();
-  //  })
+
+   for(var key in newMap){
+        var results = [key, newMap[key]];
+          values.push(results)
+   }
+    //   console.log(values);
+   var sql = 'insert into products(description, category_id) VALUES ?';
+   conn.query(sql,[values],function(err){
+     if(err) throw err
+     conn.end();
+   })
 });

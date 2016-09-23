@@ -16,7 +16,7 @@ var conn = mysql.createConnection({
 var prod = [];
 var map = {};
 
-var files = fs.readFileSync('../files/week1.csv', 'utf8')
+var files = fs.readFileSync('../files/week2.csv', 'utf8')
             .split('\n');
   for(var i = 0; i < files.length -1; i++){
          var data = files[i].split(',');
@@ -27,30 +27,32 @@ var files = fs.readFileSync('../files/week1.csv', 'utf8')
      products.forEach(function(product){
        map[product.description] = product.id;
      })
-    //  console.log(map);
+      console.log(map);
 
     var values = [];
+    var prodMap = {};
+
 
   for(var i = 0; i < prod.length; i++){
-    for(key in map){
+    for(var key in map){
+      var name = prod[i][2];
 
- var selling_date = prod[i][1] + 2016;
+ var prodID = map[name];
+  var selling_date = prod[i][1] + 2016;
   //console.log(selling_date);
     var quantity = prod[i][3];
-  //  console.log(quantity);
       var selling_prices = prod[i][4];
-        var prod_id = map[key];
-        //  console.log(prod_id);
-     }
 
-     values.push([quantity, selling_prices, selling_date, prod_id])
-     console.log(values);
 
 }
-    // var sql = 'insert into sales(quantity, selling_prices, selling_date, prod_id) VALUES ?';
-    // conn.query(sql,[values],function(err){
-    //   if(err) throw err
-    //   conn.end();
-    // })
+    values.push([selling_date, quantity, selling_prices, prodID])
+}
+//        console.log(values);
+
+    var sql = 'insert into sales(selling_date, quantity, selling_prices, prod_id) VALUES ?';
+    conn.query(sql,[values],function(err){
+      if(err) throw err
+      conn.end();
+    })
 
 });
