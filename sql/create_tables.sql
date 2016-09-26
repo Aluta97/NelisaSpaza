@@ -26,13 +26,16 @@ create table IF NOT EXISTS sales (
     foreign key (prod_id) references products(id)
 );
 
-create table IF NOT EXISTS purcahses (
+create table IF NOT EXIST purcahses (
     id int primary key auto_increment,
-    product varchar(100),
-    purchase_date date,
+    purchase_date char(100) not null,
     quantity decimal (10.2),
-    cost decimal (10.2),
-    supplier_id int,
+    cost char(100) not null,
     prod_id int,
     foreign key (prod_id) references products(id)
+);
+
+create table IF NOT EXISTS shops (
+  id int primary key auto_increment,
+  shop char(100) not null
 );

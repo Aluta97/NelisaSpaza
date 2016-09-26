@@ -27,7 +27,7 @@ var files = fs.readFileSync('../files/week2.csv', 'utf8')
      products.forEach(function(product){
        map[product.description] = product.id;
      })
-      console.log(map);
+      //console.log(map);
 
     var values = [];
     var prodMap = {};
@@ -36,10 +36,9 @@ var files = fs.readFileSync('../files/week2.csv', 'utf8')
   for(var i = 0; i < prod.length; i++){
     for(var key in map){
       var name = prod[i][2];
-
+//console.log(name);
  var prodID = map[name];
   var selling_date = prod[i][1] + 2016;
-  //console.log(selling_date);
     var quantity = prod[i][3];
       var selling_prices = prod[i][4];
 
@@ -49,7 +48,7 @@ var files = fs.readFileSync('../files/week2.csv', 'utf8')
 }
 //        console.log(values);
 
-    var sql = 'insert into sales(selling_date, quantity, selling_prices, prod_id) VALUES ?';
+    var sql = 'insert into purcahses(selling_date, quantity, selling_prices, prod_id) VALUES ?';
     conn.query(sql,[values],function(err){
       if(err) throw err
       conn.end();
