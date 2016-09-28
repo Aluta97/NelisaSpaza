@@ -1,0 +1,22 @@
+<h1>Products</h1>
+
+
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>id</th>
+        <th>Product</th>
+        <th>category_id</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      {{#products}}
+        <tr>
+          <td>{{id}}</td>
+          <td>{{description}}</td>
+          <td>{{category_id}}</td>
+        </tr>
+      {{/products}}
+  </tbody>
+</table>

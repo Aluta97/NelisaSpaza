@@ -46,9 +46,9 @@ var files = fs.readFileSync('../files/week2.csv', 'utf8')
 }
     values.push([selling_date, quantity, selling_prices, prodID])
 }
-//        console.log(values);
+       //console.log(values);
 
-    var sql = 'insert into purcahses(selling_date, quantity, selling_prices, prod_id) VALUES ?';
+    var sql = 'insert into sales(selling_date, quantity, selling_prices, prod_id) VALUES ?';
     conn.query(sql,[values],function(err){
       if(err) throw err
       conn.end();
