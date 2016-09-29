@@ -1,24 +1,23 @@
 <h1>Sales</h1>
 
-  <table class="table table-bordered">
-    <thead>
+<div class="container">
+  <table class="table table-striped">
       <tr>
-        <th>id</th>
         <th>selling_date</th>
         <th>quantity</th>
         <th>selling_prices</th>
-        <th>prod_id</th>
+        <th>product</th>
       </tr>
     </thead>
     <tbody>
-      {{#sales}}
+        {{#sales}}
         <tr>
-          <td>{{id}}</td>
           <td>{{selling_date}}</td>
           <td>{{quantity}}</td>
           <td>{{selling_prices}}</td>
-          <td>{{prod_id}}</td>
+          <td>{{description}}</td>
         </tr>
         {{/sales}}
       </tbody>
     </table>
+</div>
