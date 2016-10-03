@@ -47,9 +47,11 @@ app.use(bodyParser.json())
 
 app.get('/categories', categories.show);
 app.get('/categories/add', categories.showAdd);
-app.post('/categories/add', categories.add);
 app.get('/categories/edit/:id', categories.get);
+app.post('/categories/update/:id', categories.update);
+app.post('/categories/add', categories.add);
 
+ app.get('/categories/delete/:id', categories.delete);
 
 
 

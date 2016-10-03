@@ -40,3 +40,26 @@ exports.get = function(req, res, next){
 		});
 	});
 };
+
+//update categories table
+exports.update = function(req, res, next){
+  var data = req.body;
+  var id = req.params.id;
+  req.getConnection(function(err, connection){
+			connection.query('UPDATE categories SET ? WHERE id = ?', [data, id], function(err, rows){
+    			if (err) next(err);
+          		res.redirect('/categories');
+    		});
+
+    });
+};
+
+exports.delete = function(req, res, next){
+	var id = req.params.id;
+	req.getConnection(function(err, connection){
+		connection.query('DELETE FROM categories WHERE id = ?', [id], function(err,rows){
+			if(err) return next(err);
+			res.redirect('/categories');
+		});
+	});
+};

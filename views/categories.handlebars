@@ -4,7 +4,6 @@
 
 <a href="/categories/add">add category</a>
 
-
 <div class="container">
 
   <table class="table table-bordered">
@@ -18,8 +17,8 @@
     {{#categories}}
       <tr>
         <td>{{category}}</td>
-        <!-- <a href="/categories/edit/{{id}}">Edit</a> -->
-
+        <td><a href="/categories/edit/{{id}}">Edit</a></td>
+        <td><a href="/categories/delete/{{id}}">Delete</a></td>
       </tr>
     {{/categories}}
   <tbody>
