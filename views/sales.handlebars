@@ -1,5 +1,7 @@
 <h1>Sales</h1>
 
+<a href="/sales/add">Add sales</a>
+
 <div class="container">
   <table class="table table-striped">
       <tr>
@@ -16,6 +18,8 @@
           <td>{{quantity}}</td>
           <td>{{selling_prices}}</td>
           <td>{{description}}</td>
+          <td><a href="/sales/edit/{{id}}">Edit</a></td>
+        <!-- //  <td><a href="/sales/delete/{{id}}">Edit</a></td> -->
         </tr>
         {{/sales}}
       </tbody>

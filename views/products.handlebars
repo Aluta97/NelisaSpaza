@@ -1,6 +1,6 @@
 <h1>Products</h1>
 
-<a href="/products/add">Add Product</a>
+<a href="/products/add" type="button" class="btn btn-primary">Add Product</a>
 
 <div class="container">
   <table class="table table-bordered">
@@ -10,12 +10,14 @@
         <th>category</th>
       </tr>
     </thead>
-    <tbody>
 
+    <tbody>
       {{#products}}
         <tr>
           <td>{{description}}</td>
           <td>{{category}}</td>
+          <td><a href="/products/edit/{{product_id}}">Edit</a></td>
+          <td><a href="/products/delete/{{product_id}}">Delete</a></td>
         </tr>
       {{/products}}
   </tbody>

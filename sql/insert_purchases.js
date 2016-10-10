@@ -17,7 +17,7 @@ var purchases = [];
 var map = {};
 
    var files = fs.readFileSync('../files/purchases.csv', 'utf8')
-               .split('\n');
+               .split('\n').splice(1).filter(Boolean);
      for(var i = 0; i < files.length -1; i++){
             var data = files[i].split(';');
             purchases.push(data)
@@ -58,6 +58,6 @@ var map = {};
 
   })
 
-  
+
 
  });
