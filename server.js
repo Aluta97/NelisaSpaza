@@ -61,7 +61,7 @@ app.get('/products/delete/:id', products.delete);
 
 app.get('/sales', sales.show);
 app.get('/sales/add', sales.showAdd);
-// app.get('/sales/edit/:id', sales.get);
+app.get('/sales/edit/', sales.get);
 app.post('/sales/update/', sales.update);
 app.post('/sales/add/', sales.add);
 

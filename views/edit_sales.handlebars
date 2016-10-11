@@ -2,20 +2,20 @@
 
 <form action="/sales/update/{{data.id}}" method="POST">
 
+  <div class="product">
+    <label for="product">Product</label>
+
+    <select class="product" name="products_id">
+      {{#products}}
+        <option {{selected}} value="{{id}}">{{description}}</option>
+      {{/products}}
+    </select>
+
+  </div>
+
 	<div>
 		<label for="date">Date</label>
 		<input type="text" step="any" name="date" value="{{data.selling_date}}">
-	</div>
-
-	<div class="product">
-		<label for="product">Product</label>
-
-		<select class="product" name="products_id">
-			{{#products}}
-				<option {{selected}} value="{{id}}">{{description}}</option>
-			{{/products}}
-		</select>
-
 	</div>
 
 	<div>
