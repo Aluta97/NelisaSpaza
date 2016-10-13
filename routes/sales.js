@@ -83,12 +83,12 @@ exports.update = function(req, res, next) {
 };
 
 
-// exports.delete = function(req, res, next) {
-//     var id = req.params.id;
-//     req.getConnection(function(err, connection) {
-//         connection.query('DELETE FROM sales WHERE id = ?', [id], function(err, rows) {
-//             if (err) return next(err);
-//             res.redirect('/sales');
-//         });
-//     });
-// };
+exports.delete = function(req, res, next) {
+    var id = req.params.id;
+    req.getConnection(function(err, connection) {
+        connection.query('DELETE FROM sales WHERE id = ?', [id], function(err, rows) {
+            if (err) return next(err);
+            res.redirect('/sales');
+        });
+    });
+};

@@ -37,12 +37,13 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 
-// function errorHandler(err, req, res, next) {
-//   res.status(500);
-//   res.render('error', { error: err });
-// }
+function errorHandler(err, req, res, next) {
+  res.status(500);
+  res.render('error', { error: err });
+}
 
 //setup the handlers
+
 
 
 app.get('/categories', categories.show);
@@ -61,17 +62,25 @@ app.get('/products/delete/:id', products.delete);
 
 app.get('/sales', sales.show);
 app.get('/sales/add', sales.showAdd);
-app.get('/sales/edit/', sales.get);
-app.post('/sales/update/', sales.update);
+app.get('/sales/edit/:id', sales.get);
+app.post('/sales/update/:id', sales.update);
 app.post('/sales/add/', sales.add);
-
-// app.get('/sales/delete/', sales.delete);
-
-
-
+app.get('/sales/delete/:id', sales.delete);
 
 
 app.get('/purchases', purchases.show);
+app.get('/purchases/add', purchases.showAdd);
+app.get('/purchases/edit/:id', purchases.get);
+app.post('/purchases/update/:id', purchases.update);
+app.post('/purchases/add/', purchases.add);
+
+
+app.use(errorHandler);
+
+
+
+
+
 
 // var portNumber = process.env.CRUD_PORT_NR || 3000;
 //

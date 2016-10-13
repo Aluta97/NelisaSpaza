@@ -1,5 +1,8 @@
 <h1>Purchases</h1>
 
+<a href="/purchases/add">Add purchase</a>
+
+
 <div class="container">
   <table class="table table-bordered">
     <thead>
@@ -18,6 +21,8 @@
           <td>{{quantity}}
           <td>{{cost}}</td>
           <td>{{description}}</td>
+          <td><a href="/purchases/edit/{{purcahses_id}}">Edit</a></td>
+          <td><a href="/purchases/delete/{{purcahses_id}}">Delete</a></td>
         </tr>
     {{/purchases}}
     </tbody>
