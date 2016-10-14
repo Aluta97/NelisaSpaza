@@ -1,6 +1,6 @@
 <h1>Purchases</h1>
 
-<a href="/purchases/add">Add purchase</a>
+<a href="/purchases/add" type="button" class="btn btn-primary">Add purchase</a>
 
 
 <div class="container">
@@ -21,8 +21,8 @@
           <td>{{quantity}}
           <td>{{cost}}</td>
           <td>{{description}}</td>
-          <td><a href="/purchases/edit/{{purcahses_id}}">Edit</a></td>
-          <td><a href="/purchases/delete/{{purcahses_id}}">Delete</a></td>
+          <td><a href="/purchases/edit/{{purcahses_id}}" type="button" class="btn btn-primary">Edit</a></td>
+          <td><a href="/purchases/delete/{{purcahses_id}}" type="button" class="btn btn-primary">Delete</a></td>
         </tr>
     {{/purchases}}
     </tbody>

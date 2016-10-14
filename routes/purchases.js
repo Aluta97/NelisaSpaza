@@ -41,13 +41,12 @@ exports.add = function(req, res, next) {
 
 exports.get = function(req, res, next) {
     var id = req.params.id;
-		// console.log(id);
     req.getConnection(function(err, connection) {
         connection.query('SELECT * FROM products', [id], function(err, products) {
             if (err) return next(err);
             connection.query('SELECT * FROM purcahses WHERE id = ?', [id], function(err, sales) {
                 if (err) return next(err);
-                var purcahses = purcahses[0];
+                // var purchases = purchases[0];
                 products = products.map(function(product) {
                     product.selected = product.id === product.prod_id ? "selected" : "";
                     return product;
@@ -74,6 +73,15 @@ exports.update = function(req, res, next) {
     req.getConnection(function(err, connection) {
         if (err) return next(err);
         connection.query('UPDATE purcahses SET ? WHERE id = ?', [data, id], function(err, rows) {
+            if (err) return next(err);
+            res.redirect('/purchases');
+        });
+    });
+};
+exports.delete = function(req, res, next) {
+    var id = req.params.id;
+    req.getConnection(function(err, connection) {
+        connection.query('DELETE FROM purcahses WHERE id = ?', [id], function(err, rows) {
             if (err) return next(err);
             res.redirect('/purchases');
         });

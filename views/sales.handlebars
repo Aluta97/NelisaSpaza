@@ -1,9 +1,10 @@
 <h1>Sales</h1>
 
-<a href="/sales/add">Add sales</a>
+<a href="/sales/add" type="button" class="btn btn-primary">Add sales</a>
 
 <div class="container">
-  <table class="table table-striped">
+  <table class="table table-bordered">
+    <thead>
       <tr>
         <th>selling_date</th>
         <th>quantity</th>
@@ -11,6 +12,7 @@
         <th>product</th>
       </tr>
     </thead>
+
     <tbody>
         {{#sales}}
         <tr>
@@ -18,8 +20,8 @@
           <td>{{quantity}}</td>
           <td>{{selling_prices}}</td>
           <td>{{description}}</td>
-          <td><a href="/sales/edit/{{sales_id}}">Edit</a></td>
-          <td><a href="/sales/delete/{{sales_id}}">Delete</a></td>
+          <td><a href="/sales/edit/{{sales_id}}" type="button" class="btn btn-primary">Edit</a></td>
+          <td><a href="/sales/delete/{{sales_id}}" type="button" class="btn btn-primary">Delete</a></td>
         </tr>
         {{/sales}}
       </tbody>

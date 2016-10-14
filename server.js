@@ -73,6 +73,7 @@ app.get('/purchases/add', purchases.showAdd);
 app.get('/purchases/edit/:id', purchases.get);
 app.post('/purchases/update/:id', purchases.update);
 app.post('/purchases/add/', purchases.add);
+app.get('/purchases/delete/:id', purchases.delete);
 
 
 app.use(errorHandler);

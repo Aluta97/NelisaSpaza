@@ -2,7 +2,7 @@
 
 <!-- <button type "button" href="/categories/add">add category</button> -->
 
-<a href="/categories/add">add category</a>
+<a href="/categories/add" type="button" class="btn btn-primary">add category</a>
 
 <div class="container">
 
@@ -17,8 +17,8 @@
     {{#categories}}
       <tr>
         <td>{{category}}</td>
-        <td><a href="/categories/edit/{{id}}">Edit</a></td>
-        <td><a href="/categories/delete/{{id}}">Delete</a></td>
+        <td><a href="/categories/edit/{{id}}" type="button" class="btn btn-primary">Edit</a></td>
+        <td><a href="/categories/delete/{{id}}" type="button" class="btn btn-primary">Delete</a></td>
       </tr>
     {{/categories}}
   </tbody>
