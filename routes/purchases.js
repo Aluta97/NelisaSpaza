@@ -44,16 +44,16 @@ exports.get = function(req, res, next) {
     req.getConnection(function(err, connection) {
         connection.query('SELECT * FROM products', [id], function(err, products) {
             if (err) return next(err);
-            connection.query('SELECT * FROM purcahses WHERE id = ?', [id], function(err, sales) {
+            connection.query('SELECT * FROM purcahses WHERE id = ?', [id], function(err, purcahses) {
                 if (err) return next(err);
-                // var purchases = purchases[0];
+                var purcahses = purcahses[0];
                 products = products.map(function(product) {
-                    product.selected = product.id === product.prod_id ? "selected" : "";
+                    product.selected = product.id === purcahses.prod_id ? "selected" : "";
                     return product;
                 });
                 res.render('edit_purchases', {
                     products: products,
-                    data: purchases
+                    data: purcahses
                 });
             });
         });
@@ -68,7 +68,6 @@ exports.update = function(req, res, next) {
         quantity: Number(req.body.quantity),
         cost:req.body.cost
     };
-		// console.log(data);
     var id = req.params.id;
     req.getConnection(function(err, connection) {
         if (err) return next(err);

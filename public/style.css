@@ -27,18 +27,10 @@ label {
 input[type=submit] {
 	padding: 0.5em;
 	border: 0.3em solid green;
-	font-weight: bold;
+	/*font-weight: bold;*/
 	font-size: 1em;
 };
 
-input[type=text] {
-	padding: 0.2em;
-	font-size: 1.5em;
-	display: block;
-	margin-top: 0.5em;
-	margin-bottom: 1em;
-}
-
 .field > label {
-	width: 10px;
+	width: 30px;
 }

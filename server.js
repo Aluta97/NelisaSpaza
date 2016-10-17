@@ -1,9 +1,5 @@
-// var express = require('express');
-// var exphbs = require('express-handlebars');
-// var app = express();
-// var application = require('./app');
-//
-//'use strict';
+
+
 
 var express = require('express'),
     exphbs  = require('express-handlebars'),
@@ -14,6 +10,7 @@ var express = require('express'),
     products = require('./routes/products');
     purchases = require('./routes/purchases');
     sales = require('./routes/sales');
+    //application = require('./app');
 
 var app = express();
 
@@ -44,8 +41,6 @@ function errorHandler(err, req, res, next) {
 
 //setup the handlers
 
-
-
 app.get('/categories', categories.show);
 app.get('/categories/add', categories.showAdd);
 app.get('/categories/edit/:id', categories.get);
@@ -67,7 +62,6 @@ app.post('/sales/update/:id', sales.update);
 app.post('/sales/add/', sales.add);
 app.get('/sales/delete/:id', sales.delete);
 
-
 app.get('/purchases', purchases.show);
 app.get('/purchases/add', purchases.showAdd);
 app.get('/purchases/edit/:id', purchases.get);
@@ -77,10 +71,6 @@ app.get('/purchases/delete/:id', purchases.delete);
 
 
 app.use(errorHandler);
-
-
-
-
 
 
 // var portNumber = process.env.CRUD_PORT_NR || 3000;
