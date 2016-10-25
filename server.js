@@ -40,6 +40,7 @@ function errorHandler(err, req, res, next) {
 }
 
 //setup the handlers
+app.get('/', categories.show);
 
 app.get('/categories', categories.show);
 app.get('/categories/add', categories.showAdd);

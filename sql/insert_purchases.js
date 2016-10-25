@@ -36,20 +36,14 @@ var map = {};
         for(var i = 0; i < purchases.length; i++){
             for(var key in map){
               var name = purchases[i][2];
-        //console.log(name);
-         var prod_id = map[name];
-        //    console.log(prodID);
-              var purchase_date = purchases[i][1] + 2016;
-              //console.log(date);
-              var quantity = purchases[i][3];
-              //console.log(quantity);
-              var cost = purchases[i][4];
-            //  console.log(cost);
+                var prod_id = map[name];
+                  var purchase_date = purchases[i][1];
+                    var quantity = purchases[i][3];
+                      var cost = purchases[i][4];
+
   }
           values.push([quantity, cost, prod_id, purchase_date])
   }
-
-      //console.log(values);
 
   var sql = 'insert into purcahses(quantity, cost, prod_id, purchase_date) VALUES ?';
   conn.query(sql,[values],function(err){

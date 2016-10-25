@@ -29,7 +29,7 @@ create table sales (
     quantity decimal (10.2),
     selling_prices char(100) not null,
     prod_id int,
-    foreign key (prod_id) references products(id)  
+    foreign key (prod_id) references products(id)
 );
 
 create table purcahses (

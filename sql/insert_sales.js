@@ -38,7 +38,7 @@ var files = fs.readFileSync('../files/week2.csv', 'utf8')
       var name = prod[i][2];
 //console.log(name);
  var prodID = map[name];
-  var selling_date = prod[i][1] + 2016;
+  var selling_date = prod[i][1];
     var quantity = prod[i][3];
       var selling_prices = prod[i][4];
 
