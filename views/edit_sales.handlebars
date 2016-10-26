@@ -15,7 +15,7 @@
 
 	<div>
 		<label for="date">Date</label>
-		<input type="date" step="any" name="selling_date" value="{{data.selling_date}}">
+		<input type="text" step="any" name="selling_date" value="{{data.selling_date}}">
 	</div>
 
 	<div>
@@ -28,5 +28,7 @@
 		<input type="number" step="any" name="quantity" value="{{data.quantity}}">
 	</div>
 
-	<input type="submit">
+	<button type="submit" class="btn btn-primary">Submit</button>
+  <!-- <td><a href="/sales/edit/{{sales_id}}" type="button" class="btn btn-primary">Edit</a></td> -->
+
 </form>

@@ -6,6 +6,7 @@ var express = require('express'),
     mysql = require('mysql'),
     myConnection = require('express-myconnection'),
     bodyParser = require('body-parser'),
+    session = require('express-session');
     categories = require('./routes/categories');
     products = require('./routes/products');
     purchases = require('./routes/purchases');
@@ -40,7 +41,13 @@ function errorHandler(err, req, res, next) {
 }
 
 //setup the handlers
-app.get('/', categories.show);
+app.get("/",function(req, res) {
+  res.render("home");
+})
+
+app.get("/login",function(req, res) {
+  res.render("login");
+})
 
 app.get('/categories', categories.show);
 app.get('/categories/add', categories.showAdd);
@@ -69,6 +76,7 @@ app.get('/purchases/edit/:id', purchases.get);
 app.post('/purchases/update/:id', purchases.update);
 app.post('/purchases/add/', purchases.add);
 app.get('/purchases/delete/:id', purchases.delete);
+
 
 
 app.use(errorHandler);

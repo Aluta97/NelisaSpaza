@@ -6,17 +6,9 @@ table {
   text-align: center;
 }
 
-/*thead {
-  font-size: 20px;
-}
-
-h1 {
+/*div {
   text-align: center;
-}
-
-div {
-  text-align: center;
-}
+}*/
 
 label {
 	font-weight: bold;
@@ -24,13 +16,21 @@ label {
 }
 
 
-input[type=submit] {
+/*input[type=submit] {
 	padding: 0.5em;
 	border: 0.3em solid green;
 	font-weight: bold;*/
 	font-size: 1em;
-};
+};*/
 
+/*h1 {
+  text-align: center;
+}*/
+
+thead {
+  font-size: 20px;
+  /*text-align: center*/
+}
 .field > label {
 	width: 30px;
-}*/
+}
