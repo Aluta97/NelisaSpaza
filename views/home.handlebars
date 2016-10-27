@@ -1,3 +1,14 @@
 <h1>Welcome to Nelisa Spaza App<h1>
 
+  {{#if user}}
+      <h3>Hello, you are logged in as <h3>
+       {{user.name}}
+  {{/if}}
+
+  
+      <h3>if you dont see this then you not logged in<h3>
+  {{#if user.is_admin}}
+    <h3>Welcome admin user you have the right to add, edit and delete<h3>
+  {{/if}}
 <!-- <h2>please login to acees the info<h2> -->
+<a href="/logout" type="button" class="btn btn-primary">Logout</a>

@@ -26,6 +26,18 @@ var dbOptions = {
 app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
+var rolesMap = {
+  "nelisa":"admin",
+  "aluta" :"viewer"
+};
+
+app.use(session({
+secret: 'keyboard cat',
+resave: false,
+saveUninitialized: true
+}))
+
+
 app.use(express.static(__dirname + '/public'));
 
 //setup middleware
@@ -40,14 +52,39 @@ function errorHandler(err, req, res, next) {
   res.render('error', { error: err });
 }
 
-//setup the handlers
-app.get("/",function(req, res) {
-  res.render("home");
+app.get("/", function(req, res){
+    res.redirect("/home");
+});
+
+var checkUser = function(req, res, next){
+    console.log("checkUser...");
+      if(req.session.user){
+        return next();
+  }
+   res.redirect("/login");
+    // next();
+};
+
+app.post("/login", function(req, res){
+      req.session.user = {
+        name : req.body.username,
+        is_admin : rolesMap[req.body.username] === "admin"
+      };
+        res.redirect("/home");
 })
 
-app.get("/login",function(req, res) {
-  res.render("login");
+app.get("/home",checkUser,function(req, res){
+    res.render("home", {user : req.session.user});
+});
+
+app.get("/logout", function(req, res){
+    delete req.session.user;
+    res.redirect("/login")
 })
+
+app.get("/login", function(req, res){
+    res.render("login", {});
+});
 
 app.get('/categories', categories.show);
 app.get('/categories/add', categories.showAdd);

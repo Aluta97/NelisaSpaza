@@ -2,13 +2,9 @@
 
 table {
   border-spacing: 30px;
-  background-color: blue;
+  background-color: green;
   text-align: center;
 }
-
-/*div {
-  text-align: center;
-}*/
 
 label {
 	font-weight: bold;
@@ -26,7 +22,9 @@ label {
 /*h1 {
   text-align: center;
 }*/
+h1 {
 
+}
 thead {
   font-size: 20px;
   /*text-align: center*/
