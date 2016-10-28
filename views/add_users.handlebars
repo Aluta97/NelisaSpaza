@@ -1,0 +1,15 @@
+<h1>Add users</h1>
+
+<form action="/users/add" method="POST">
+  <div>
+    <label for="username">Username</label>
+    <input type="text" name="username" value="{{username}}">
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+    <input type="text" name="password" value="{{password}}">
+  </div>
+
+	<button type="submit" class="btn btn-primary">Submit</button>
+</form>

@@ -1,10 +1,11 @@
 use nelisa;
 
 SET FOREIGN_KEY_CHECKS=0;
-drop table if exists categories;
-drop table if exists products;
-drop table if exists sales;
-drop table if exists purcahses;
+    drop table if exists categories;
+    drop table if exists products;
+    drop table if exists sales;
+    drop table if exists purcahses;
+    drop table if exists users;
 
 SET FOREIGN_KEY_CHECKS=1;
 
@@ -41,7 +42,8 @@ create table purcahses (
     foreign key (prod_id) references products(id)
 );
 
--- create table IF NOT EXISTS shops (
---   id int primary key auto_increment,
---   shop char(100) not null
--- );
+create table users (
+  id int primary key auto_increment,
+  username char(100) not null,
+  password char(100) not null
+);

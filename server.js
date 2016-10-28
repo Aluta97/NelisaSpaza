@@ -11,6 +11,7 @@ var express = require('express'),
     products = require('./routes/products');
     purchases = require('./routes/purchases');
     sales = require('./routes/sales');
+    users = require('./routes/users');
     //application = require('./app');
 
 var app = express();
@@ -58,19 +59,49 @@ app.get("/", function(req, res){
 
 var checkUser = function(req, res, next){
     console.log("checkUser...");
-      if(req.session.user){
+  if(req.session.user || req.path === '/login'){
         return next();
   }
    res.redirect("/login");
     // next();
 };
 
-app.post("/login", function(req, res){
-      req.session.user = {
+app.post("/login", function(req, res, next){
+
+      var inputUser = {
         name : req.body.username,
+        password : req.body.password,
         is_admin : rolesMap[req.body.username] === "admin"
       };
-        res.redirect("/home");
+        //getting my users from the database
+      req.getConnection(function(err, connection){
+        if (err) return next(err);
+
+        connection.query('SELECT * from users where username = ?', [inputUser.name], function(err, results) {
+            if (err) return next(err);
+
+              // console.log(user);
+              // console.log(results);
+
+              if (results.length === 0){
+                console.log("Access denied....");
+                return res.redirect("/login");
+              }
+              else{
+                var dbUser = results[0];
+                if(inputUser.password === dbUser.password){
+                      //console.log("Wrong Password.....");
+                      //return next();
+                      req.session.user = inputUser;
+                      res.redirect('/home');
+                }
+                else{
+                      return res.redirect("/login");
+                }
+              }
+
+          });
+      });
 })
 
 app.get("/home",checkUser,function(req, res){
@@ -86,7 +117,7 @@ app.get("/login", function(req, res){
     res.render("login", {});
 });
 
-app.get('/categories', categories.show);
+app.get('/categories', checkUser, categories.show);
 app.get('/categories/add', categories.showAdd);
 app.get('/categories/edit/:id', categories.get);
 app.post('/categories/update/:id', categories.update);
@@ -114,7 +145,10 @@ app.post('/purchases/update/:id', purchases.update);
 app.post('/purchases/add/', purchases.add);
 app.get('/purchases/delete/:id', purchases.delete);
 
-
+app.get('/users', users.show);
+app.get('/users/add', users.showAdd);
+app.post('/users/add/', users.add);
+app.post('/users/update/:id', users.update);
 
 app.use(errorHandler);
 
@@ -136,7 +170,7 @@ app.use(errorHandler);
 // });
 //
 //set the port number to an existing environment variable PORT or default to 5000
-app.set('port', (process.env.PORT || 5000));
+app.set('port', (process.env.PORT || 3000));
 //start the app like this:
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
