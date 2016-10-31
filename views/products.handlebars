@@ -1,6 +1,10 @@
 <h1>Products</h1>
 
+{{#if is_admin}}
 <a href="/products/add" type="button" class="btn btn-primary">Add Product</a>
+{{else}}
+  <td></td>
+{{/if}}
 
 <div class="container">
   <table class="table table-bordered">
@@ -16,8 +20,13 @@
         <tr>
           <td>{{description}}</td>
           <td>{{category}}</td>
+
+          {{#if ../is_admin}}
           <td><a href="/products/edit/{{product_id}}" type="button" class="btn btn-primary">Edit</a></td>
           <td><a href="/products/delete/{{product_id}}" type="button" class="btn btn-primary">Delete</a></td>
+          {{else}}
+            <td></td>
+          {{/if}}
         </tr>
       {{/products}}
   </tbody>

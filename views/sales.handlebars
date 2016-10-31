@@ -1,6 +1,10 @@
 <h1>Sales</h1>
 
+{{#if is_admin}}
 <a href="/sales/add" type="button" class="btn btn-primary">Add sales</a>
+{{else}}
+  <td></td>
+{{/if}}
 
 <div class="container">
   <table class="table table-bordered">
@@ -20,8 +24,13 @@
           <td>{{quantity}}</td>
           <td>{{selling_prices}}</td>
           <td>{{description}}</td>
+
+          {{#if ../is_admin}}
           <td><a href="/sales/edit/{{sales_id}}" type="button" class="btn btn-primary">Edit</a></td>
           <td><a href="/sales/delete/{{sales_id}}" type="button" class="btn btn-primary">Delete</a></td>
+          {{else}}
+            <td></td>
+          {{/if}}
         </tr>
         {{/sales}}
       </tbody>

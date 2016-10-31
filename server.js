@@ -73,15 +73,13 @@ app.post("/login", function(req, res, next){
         password : req.body.password,
         is_admin : rolesMap[req.body.username] === "admin"
       };
+
         //getting my users from the database
       req.getConnection(function(err, connection){
         if (err) return next(err);
 
         connection.query('SELECT * from users where username = ?', [inputUser.name], function(err, results) {
             if (err) return next(err);
-
-              // console.log(user);
-              // console.log(results);
 
               if (results.length === 0){
                 console.log("Access denied....");
@@ -90,8 +88,8 @@ app.post("/login", function(req, res, next){
               else{
                 var dbUser = results[0];
                 if(inputUser.password === dbUser.password){
-                      //console.log("Wrong Password.....");
-                      //return next();
+                      console.log("Access granted.....");
+
                       req.session.user = inputUser;
                       res.redirect('/home');
                 }
@@ -118,27 +116,27 @@ app.get("/login", function(req, res){
 });
 
 app.get('/categories', checkUser, categories.show);
-app.get('/categories/add', categories.showAdd);
-app.get('/categories/edit/:id', categories.get);
-app.post('/categories/update/:id', categories.update);
-app.post('/categories/add', categories.add);
-app.get('/categories/delete/:id', categories.delete);
+app.get('/categories/add', checkUser, categories.showAdd);
+app.get('/categories/edit/:id', checkUser, categories.get);
+app.post('/categories/update/:id', checkUser, categories.update);
+app.post('/categories/add', checkUser, categories.add);
+app.get('/categories/delete/:id', checkUser, categories.delete);
 
-app.get('/products', products.show);
+app.get('/products',checkUser, products.show);
 app.get('/products/add', products.showAdd);
 app.get('/products/edit/:id', products.get);
 app.post('/products/update/:id', products.update);
 app.post('/products/add', products.add);
 app.get('/products/delete/:id', products.delete);
 
-app.get('/sales', sales.show);
+app.get('/sales',checkUser, sales.show);
 app.get('/sales/add', sales.showAdd);
 app.get('/sales/edit/:id', sales.get);
 app.post('/sales/update/:id', sales.update);
 app.post('/sales/add/', sales.add);
 app.get('/sales/delete/:id', sales.delete);
 
-app.get('/purchases', purchases.show);
+app.get('/purchases',checkUser, purchases.show);
 app.get('/purchases/add', purchases.showAdd);
 app.get('/purchases/edit/:id', purchases.get);
 app.post('/purchases/update/:id', purchases.update);
@@ -170,7 +168,7 @@ app.use(errorHandler);
 // });
 //
 //set the port number to an existing environment variable PORT or default to 5000
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 4000));
 //start the app like this:
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
