@@ -123,25 +123,25 @@ app.post('/categories/add', checkUser, categories.add);
 app.get('/categories/delete/:id', checkUser, categories.delete);
 
 app.get('/products',checkUser, products.show);
-app.get('/products/add', products.showAdd);
-app.get('/products/edit/:id', products.get);
-app.post('/products/update/:id', products.update);
-app.post('/products/add', products.add);
-app.get('/products/delete/:id', products.delete);
+app.get('/products/add',checkUser, products.showAdd);
+app.get('/products/edit/:id',checkUser, products.get);
+app.post('/products/update/:id',checkUser, products.update);
+app.post('/products/add',checkUser, products.add);
+app.get('/products/delete/:id',checkUser, products.delete);
 
 app.get('/sales',checkUser, sales.show);
-app.get('/sales/add', sales.showAdd);
-app.get('/sales/edit/:id', sales.get);
-app.post('/sales/update/:id', sales.update);
-app.post('/sales/add/', sales.add);
-app.get('/sales/delete/:id', sales.delete);
+app.get('/sales/add',checkUser, sales.showAdd);
+app.get('/sales/edit/:id',checkUser, sales.get);
+app.post('/sales/update/:id',checkUser, sales.update);
+app.post('/sales/add/',checkUser, sales.add);
+app.get('/sales/delete/:id',checkUser, sales.delete);
 
 app.get('/purchases',checkUser, purchases.show);
-app.get('/purchases/add', purchases.showAdd);
-app.get('/purchases/edit/:id', purchases.get);
-app.post('/purchases/update/:id', purchases.update);
-app.post('/purchases/add/', purchases.add);
-app.get('/purchases/delete/:id', purchases.delete);
+app.get('/purchases/add',checkUser, purchases.showAdd);
+app.get('/purchases/edit/:id',checkUser, purchases.get);
+app.post('/purchases/update/:id',checkUser, purchases.update);
+app.post('/purchases/add/',checkUser, purchases.add);
+app.get('/purchases/delete/:id',checkUser, purchases.delete);
 
 app.get('/users', users.show);
 app.get('/users/add', users.showAdd);
