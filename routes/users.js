@@ -5,6 +5,8 @@ exports.show = function (req, res, next) {
         if (err) return next(err);
 		res.render( 'users', {
 				users : results,
+				user : req.session.user,
+				is_admin:req.session.user.is_admin
 		});
       });
       // console.log(results);

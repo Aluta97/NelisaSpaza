@@ -6,13 +6,13 @@ var express = require('express'),
     mysql = require('mysql'),
     myConnection = require('express-myconnection'),
     bodyParser = require('body-parser'),
-    session = require('express-session');
-    categories = require('./routes/categories');
-    products = require('./routes/products');
-    purchases = require('./routes/purchases');
-    sales = require('./routes/sales');
-    users = require('./routes/users');
-    //application = require('./app');
+    session = require('express-session'),
+    categories = require('./routes/categories'),
+    products = require('./routes/products'),
+    purchases = require('./routes/purchases'),
+    sales = require('./routes/sales'),
+    users = require('./routes/users'),
+    mid = require('./middlewares');
 
 var app = express();
 
@@ -32,6 +32,7 @@ var rolesMap = {
   "aluta" :"viewer"
 };
 
+//HTTP session to check if someone is logged in
 app.use(session({
 secret: 'keyboard cat',
 resave: false,
@@ -57,6 +58,8 @@ app.get("/", function(req, res){
     res.redirect("/home");
 });
 
+//middleware to check if the user is Authenticated
+//if the user is not authenticated redirect to home page
 var checkUser = function(req, res, next){
     console.log("checkUser...");
   if(req.session.user || req.path === '/login'){
@@ -66,6 +69,9 @@ var checkUser = function(req, res, next){
     // next();
 };
 
+// var checkAdmin = function(req, res, next){
+//     return next();
+// }
 app.post("/login", function(req, res, next){
 
       var inputUser = {
@@ -102,6 +108,7 @@ app.post("/login", function(req, res, next){
       });
 })
 
+
 app.get("/home",checkUser,function(req, res){
     res.render("home", {user : req.session.user});
 });
@@ -115,38 +122,39 @@ app.get("/login", function(req, res){
     res.render("login", {});
 });
 
+
 app.get('/categories', checkUser, categories.show);
-app.get('/categories/add', checkUser, categories.showAdd);
-app.get('/categories/edit/:id', checkUser, categories.get);
-app.post('/categories/update/:id', checkUser, categories.update);
-app.post('/categories/add', checkUser, categories.add);
-app.get('/categories/delete/:id', checkUser, categories.delete);
+app.get('/categories/add', checkUser,mid.checkIfAdmin, categories.showAdd);
+app.get('/categories/edit/:id', checkUser,mid.checkIfAdmin, categories.get);
+app.post('/categories/update/:id', checkUser,mid.checkIfAdmin, categories.update);
+app.post('/categories/add', checkUser,mid.checkIfAdmin, categories.add);
+app.get('/categories/delete/:id', checkUser,mid.checkIfAdmin, categories.delete);
 
 app.get('/products',checkUser, products.show);
-app.get('/products/add',checkUser, products.showAdd);
-app.get('/products/edit/:id',checkUser, products.get);
-app.post('/products/update/:id',checkUser, products.update);
-app.post('/products/add',checkUser, products.add);
-app.get('/products/delete/:id',checkUser, products.delete);
+app.get('/products/add',checkUser,mid.checkIfAdmin, products.showAdd);
+app.get('/products/edit/:id',checkUser,mid.checkIfAdmin, products.get);
+app.post('/products/update/:id',checkUser,mid.checkIfAdmin, products.update);
+app.post('/products/add',checkUser,mid.checkIfAdmin, products.add);
+app.get('/products/delete/:id',checkUser,mid.checkIfAdmin, products.delete);
 
 app.get('/sales',checkUser, sales.show);
-app.get('/sales/add',checkUser, sales.showAdd);
-app.get('/sales/edit/:id',checkUser, sales.get);
-app.post('/sales/update/:id',checkUser, sales.update);
-app.post('/sales/add/',checkUser, sales.add);
-app.get('/sales/delete/:id',checkUser, sales.delete);
+app.get('/sales/add',checkUser,mid.checkIfAdmin, sales.showAdd);
+app.get('/sales/edit/:id',checkUser,mid.checkIfAdmin, sales.get);
+app.post('/sales/update/:id',checkUser,mid.checkIfAdmin, sales.update);
+app.post('/sales/add/',checkUser,mid.checkIfAdmin, sales.add);
+app.get('/sales/delete/:id',checkUser,mid.checkIfAdmin, sales.delete);
 
 app.get('/purchases',checkUser, purchases.show);
-app.get('/purchases/add',checkUser, purchases.showAdd);
-app.get('/purchases/edit/:id',checkUser, purchases.get);
-app.post('/purchases/update/:id',checkUser, purchases.update);
-app.post('/purchases/add/',checkUser, purchases.add);
-app.get('/purchases/delete/:id',checkUser, purchases.delete);
+app.get('/purchases/add',checkUser,mid.checkIfAdmin, purchases.showAdd);
+app.get('/purchases/edit/:id',checkUser,mid.checkIfAdmin, purchases.get);
+app.post('/purchases/update/:id',checkUser,mid.checkIfAdmin, purchases.update);
+app.post('/purchases/add/',checkUser,mid.checkIfAdmin, purchases.add);
+app.get('/purchases/delete/:id',checkUser,mid.checkIfAdmin, purchases.delete);
 
-app.get('/users', users.show);
-app.get('/users/add', users.showAdd);
-app.post('/users/add/', users.add);
-app.post('/users/update/:id', users.update);
+app.get('/users', mid.checkIfAdmin, checkUser, users.show);
+app.get('/users/add',mid.checkIfAdmin,checkUser, users.showAdd);
+app.post('/users/add/',mid.checkIfAdmin,checkUser, users.add);
+app.post('/users/update/:id',mid.checkIfAdmin,checkUser, users.update);
 
 app.use(errorHandler);
 
