@@ -7,13 +7,13 @@ var conn = mysql.createConnection({
     // your connection details here
 });
 
-var sql = "INSERT INTO users (username, password) VALUES ?";
+var sql = "INSERT INTO users (username, password, email) VALUES ?";
 
 var values = [
 
-  ['aluta', 7455],
-  ['nelisa',1234],
-  ['xolani', 1234]
+  ['aluta', 7455,'aluta@gmail.com'],
+  ['nelisa', 1234,'aluta@gmail.com'],
+  ['xolani', 1234,'aluta@gmail.com']
 
 ];
 

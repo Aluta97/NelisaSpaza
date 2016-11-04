@@ -1,0 +1,14 @@
+<h1>Edit users</h1>
+
+<form action="/users/update/{{data.id}}" method="POST">
+  <div>
+	<label for="">Username</label>
+	<input type="text" name="username" value="{{data.username}}">
+</div>
+<div>
+  <label for="">Password</label>
+  <input type="text" name="password" value="{{data.password}}">
+</div>
+  <button class="btn btn-primary" type="submit"></button>
+
+</form>

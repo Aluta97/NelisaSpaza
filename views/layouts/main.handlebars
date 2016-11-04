@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	
+
 	<link rel="stylesheet" type="text/css" href="/style.css">
 	<title>Nelisa Spaza</title>
  <meta charset="utf-8">
@@ -19,6 +19,7 @@
 	    </div>
 
 	    <ul class="nav navbar-nav">
+					{{#if user}}
 	      <li><a href="/">Home</a></li>
 	      <li><a href="/categories">categories</a></li>
 	      <li><a href="/products">products</a></li>
@@ -26,8 +27,15 @@
 				<li><a href="/purchases">purchases</a></li>
 	    </ul>
 			<ul class="nav navbar-nav navbar-right">
-      <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-      <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			{{#if user.is_admin}}
+			<li><a href="/users"><span class="glyphicon glyphicon-log-in"></span> Manage users</a></li>
+			{{/if}}
+			<li><a href="/logout"><span class="glyphicon glyphicon-log-out"></span> Logout</a></li>
+			{{else}}
+
+			<li><a href="/signup"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+			<li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+			{{/if}}
     </ul>
 	  </div>
 	</nav>

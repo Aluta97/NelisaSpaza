@@ -1,8 +1,13 @@
 var bcrypt = require('bcrypt');
 
-exports.showSignup = function(req, res) {
+exports.show = function(req, res) {
   res.render('signup');
 }
+
+// exports.showAdd = function(req, res){
+// 	res.render('add_user');
+// }
+
 
 exports.add = function(req, res, next) {
   req.getConnection(function(err, connection) {
@@ -10,10 +15,10 @@ exports.add = function(req, res, next) {
     var data = {
       username: req.body.username,
       password: req.body.password,
-      confirmPassword: req.body.confirmPassword
     };
 
     console.log(data);
+
     var password = req.body.password;
     bcrypt.hash(password, 10, function(err, hash) {
             data.password = hash;

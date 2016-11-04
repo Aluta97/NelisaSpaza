@@ -1,6 +1,3 @@
-
-
-
 var express = require('express'),
     exphbs  = require('express-handlebars'),
     mysql = require('mysql'),
@@ -12,7 +9,10 @@ var express = require('express'),
     purchases = require('./routes/purchases'),
     sales = require('./routes/sales'),
     users = require('./routes/users'),
+    signup = require('./routes/signup'),
+    flash = require('express-flash'),
     mid = require('./middlewares');
+    bcrypt = require('bcrypt');
 
 var app = express();
 
@@ -28,8 +28,9 @@ app.engine('handlebars', exphbs({defaultLayout: 'main'}));
 app.set('view engine', 'handlebars');
 
 var rolesMap = {
-  "nelisa":"admin",
-  "aluta" :"viewer"
+  "Nelisa":"admin",
+  "aluta" :"viewer",
+  "lusindiso":"admin"
 };
 
 //HTTP session to check if someone is logged in
@@ -39,6 +40,7 @@ resave: false,
 saveUninitialized: true
 }))
 
+app.use(flash());
 
 app.use(express.static(__dirname + '/public'));
 
@@ -69,14 +71,12 @@ var checkUser = function(req, res, next){
     // next();
 };
 
-// var checkAdmin = function(req, res, next){
-//     return next();
-// }
 app.post("/login", function(req, res, next){
 
       var inputUser = {
         name : req.body.username,
         password : req.body.password,
+         email : req.body.email,
         is_admin : rolesMap[req.body.username] === "admin"
       };
 
@@ -89,12 +89,16 @@ app.post("/login", function(req, res, next){
 
               if (results.length === 0){
                 console.log("Access denied....");
+
+                req.flash("warning", "You have entered a wrong username or password")
                 return res.redirect("/login");
               }
               else{
                 var dbUser = results[0];
-                if(inputUser.password === dbUser.password){
-                      console.log("Access granted.....");
+                  bcrypt.compare(inputUser.password, dbUser.password, function(err, match) {
+
+                if(match){
+                       console.log("true.....");
 
                       req.session.user = inputUser;
                       res.redirect('/home');
@@ -102,8 +106,8 @@ app.post("/login", function(req, res, next){
                 else{
                       return res.redirect("/login");
                 }
+                });
               }
-
           });
       });
 })
@@ -153,8 +157,17 @@ app.get('/purchases/delete/:id',checkUser,mid.checkIfAdmin, purchases.delete);
 
 app.get('/users', mid.checkIfAdmin, checkUser, users.show);
 app.get('/users/add',mid.checkIfAdmin,checkUser, users.showAdd);
-app.post('/users/add/',mid.checkIfAdmin,checkUser, users.add);
+app.get('/users/edit/:id',checkUser,mid.checkIfAdmin, users.get);
 app.post('/users/update/:id',mid.checkIfAdmin,checkUser, users.update);
+app.post('/users/add/',mid.checkIfAdmin,checkUser, users.add);
+app.get('/users/delete/:id',checkUser,mid.checkIfAdmin, users.delete);
+
+
+
+app.get('/signup', signup.show);
+app.post('/signup/add', signup.add);
+// app.get('/signup/update/id', signup.udate);
+
 
 app.use(errorHandler);
 

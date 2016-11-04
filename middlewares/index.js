@@ -4,7 +4,7 @@ function checkIfAdmin(req, res, next){
   }
   else{
     //  console.log("you must be logged in as admin...")
-
+    req.flash("warning", "You must be logged in as admin to access this page")
     return res.redirect("/login");
   }
 }

@@ -1,6 +1,11 @@
 <h1>Users</h1>
 
+{{#if is_admin}}
 <a href="/users/add" type="button" class="btn btn-primary">add users</a>
+{{else}}
+  <td></td>
+{{/if}}
+
 
 <div class="container">
 
@@ -9,6 +14,7 @@
     <tr>
       <th>username</th>
       <th>password</th>
+      <!-- <th>email</th> -->
     </tr>
   </thead>
 
@@ -17,6 +23,14 @@
       <tr>
         <td>{{username}}</td>
         <td>{{password}}</td>
+        <!-- <td>{{email}}</td> -->
+
+        {{#if ../is_admin}}
+        <td><a href="/users/edit/{{id}}" type="button" class="btn btn-primary">Edit</a></td>
+        <td><a href="/users/delete/{{id}}" type="button" class="btn btn-primary">Delete</a></td>
+        {{else}}
+          <td></td>
+        {{/if}}
       </tr>
     {{/users}}
   </tbody>
