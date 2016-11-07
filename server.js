@@ -76,7 +76,7 @@ app.post("/login", function(req, res, next){
       var inputUser = {
         name : req.body.username,
         password : req.body.password,
-         email : req.body.email,
+        email : req.body.email,
         is_admin : rolesMap[req.body.username] === "admin"
       };
 
@@ -98,7 +98,7 @@ app.post("/login", function(req, res, next){
                   bcrypt.compare(inputUser.password, dbUser.password, function(err, match) {
 
                 if(match){
-                       console.log("true.....");
+                       console.log("password match.....");
 
                       req.session.user = inputUser;
                       res.redirect('/home');
@@ -189,7 +189,7 @@ app.use(errorHandler);
 // });
 //
 //set the port number to an existing environment variable PORT or default to 5000
-app.set('port', (process.env.PORT || 4000));
+app.set('port', (process.env.PORT || 5000));
 //start the app like this:
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
