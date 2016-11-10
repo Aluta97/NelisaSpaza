@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Nov 07, 2016 at 04:10 PM
+-- Generation Time: Nov 10, 2016 at 02:30 PM
 -- Server version: 5.5.53-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.20
 
@@ -101,7 +101,7 @@ CREATE TABLE IF NOT EXISTS `purcahses` (
   `prod_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `prod_id` (`prod_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=153 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=154 ;
 
 --
 -- Dumping data for table `purcahses`
@@ -259,7 +259,8 @@ INSERT INTO `purcahses` (`id`, `purchase_date`, `quantity`, `cost`, `prod_id`) V
 (149, '01-Mar', 2, 'R20,00', 11),
 (150, '01-Mar', 5, 'R3,00', 12),
 (151, '01-Mar', 3, 'R8,50', 4),
-(152, '01-Mar', 2, 'R8,50', 5);
+(152, '01-Mar', 2, 'R8,50', 5),
+(153, '13-May', 12, '34', 1);
 
 -- --------------------------------------------------------
 
@@ -275,7 +276,7 @@ CREATE TABLE IF NOT EXISTS `sales` (
   `prod_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `prod_id` (`prod_id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=119 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=120 ;
 
 --
 -- Dumping data for table `sales`
@@ -399,7 +400,8 @@ INSERT INTO `sales` (`id`, `selling_date`, `quantity`, `selling_prices`, `prod_i
 (115, '14-Feb', 18, 'R3.00', 15),
 (116, '14-Feb', 0, 'R35.00', 16),
 (117, '14-Feb', 3, 'R4.00', 18),
-(118, '14-Feb', 1, 'R15.00', 17);
+(118, '14-Feb', 1, 'R15.00', 17),
+(119, 'fdfd', 3, 'we4wsres', 1);
 
 -- --------------------------------------------------------
 
@@ -436,7 +438,17 @@ CREATE TABLE IF NOT EXISTS `users` (
   `password` char(100) NOT NULL,
   `email` char(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `username`, `password`, `email`) VALUES
+(4, 'Nelisa', '$2a$10$jgNIffI0frkJ1PfTXKVr7eony2ee2qwaIpRzxYTRVCccM0Mk17ExK', 'Nelisa@gmail.com'),
+(5, 'zozo', '$2a$10$/G1L6I5H0tHY53pccskUgeO/iRVn380OyhyXax89tmR3vDqYip4IG', 'zozo@gmail.com'),
+(6, 'xolani', '$2a$10$wum67zC.mUnrMC5dxwRtO.spc7Rianif7qKbqllHpD.MbmQWvrpHC', 'xola@gmail.co.za'),
+(7, 'Luvo', '$2a$10$GK6GlacAC8bnZT1.xAu3V.hVAV45v1HByJDCicvfCumhIKg.529Gu', 'Luvo@projectcodex.co');
 
 --
 -- Constraints for dumped tables
