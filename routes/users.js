@@ -1,4 +1,4 @@
-// var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt');
 
 exports.show = function (req, res, next) {
 	req.getConnection(function(err, connection){
@@ -27,6 +27,7 @@ exports.add = function (req, res, next) {
 
 		var data = {
       		username : input.username,
+					email 	 : input.email,
 					password : input.password
 
   	}
@@ -48,7 +49,7 @@ exports.add = function (req, res, next) {
 exports.get = function(req, res, next){
 	var id = req.params.id;
 	req.getConnection(function(err, connection){
-		connection.query('SELECT * users WHERE id = ?', [id], function(err,rows){
+		connection.query('SELECT * FROM users WHERE id = ?', [id], function(err,rows){
 			if(err) return next(err);
 			res.render('edit_users',{page_title:"Edit Customers - Node.js", data : rows[0],
 			user : req.session.user,

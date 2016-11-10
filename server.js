@@ -141,53 +141,39 @@ app.post('/products/update/:id',checkUser,mid.checkIfAdmin, products.update);
 app.post('/products/add',checkUser,mid.checkIfAdmin, products.add);
 app.get('/products/delete/:id',checkUser,mid.checkIfAdmin, products.delete);
 
-app.get('/sales',checkUser, sales.show);
+app.get('/sales',checkUser, mid.checkIfAdmin,sales.show);
 app.get('/sales/add',checkUser,mid.checkIfAdmin, sales.showAdd);
 app.get('/sales/edit/:id',checkUser,mid.checkIfAdmin, sales.get);
 app.post('/sales/update/:id',checkUser,mid.checkIfAdmin, sales.update);
 app.post('/sales/add/',checkUser,mid.checkIfAdmin, sales.add);
 app.get('/sales/delete/:id',checkUser,mid.checkIfAdmin, sales.delete);
 
-app.get('/purchases',checkUser, purchases.show);
+app.get('/purchases',checkUser,mid.checkIfAdmin, purchases.show);
 app.get('/purchases/add',checkUser,mid.checkIfAdmin, purchases.showAdd);
 app.get('/purchases/edit/:id',checkUser,mid.checkIfAdmin, purchases.get);
 app.post('/purchases/update/:id',checkUser,mid.checkIfAdmin, purchases.update);
 app.post('/purchases/add/',checkUser,mid.checkIfAdmin, purchases.add);
 app.get('/purchases/delete/:id',checkUser,mid.checkIfAdmin, purchases.delete);
 
-app.get('/users', mid.checkIfAdmin, checkUser, users.show);
-app.get('/users/add',mid.checkIfAdmin,checkUser, users.showAdd);
+app.get('/users', checkUser,mid.checkIfAdmin, users.show);
+app.get('/users/add',checkUser,mid.checkIfAdmin, users.showAdd);
 app.get('/users/edit/:id',checkUser,mid.checkIfAdmin, users.get);
-app.post('/users/update/:id',mid.checkIfAdmin,checkUser, users.update);
-app.post('/users/add/',mid.checkIfAdmin,checkUser, users.add);
+app.post('/users/update/:id',checkUser,mid.checkIfAdmin, users.update);
+app.post('/users/add/',checkUser,mid.checkIfAdmin, users.add);
 app.get('/users/delete/:id',checkUser,mid.checkIfAdmin, users.delete);
 
-
-
-app.get('/signup', signup.show);
-app.post('/signup/add', signup.add);
+app.get('/signup',signup.show);
+app.post('/signup/add',signup.add);
 // app.get('/signup/update/id', signup.udate);
 
-
 app.use(errorHandler);
-
-
-// var portNumber = process.env.CRUD_PORT_NR || 3000;
-//
-// //start everything up
-// app.listen(portNumber, function () {
-//   //  console.log('Create, Read, Update, and Delete (CRUD) example server listening on:', portNumber);
-// });
-
-
-
 
 // app.get('/sales/:week_name', function(req, res){
 //   var week_name = req.params.week_name
 //    //console.log(week_name)
 //   res.send(application.weeklyStats(week_name));
 // });
-//
+
 //set the port number to an existing environment variable PORT or default to 5000
 app.set('port', (process.env.PORT || 3000));
 //start the app like this:

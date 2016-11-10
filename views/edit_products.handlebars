@@ -2,10 +2,11 @@
 
 <form action="/products/update/{{data.id}}" method="POST">
 
+<div "container">
 	<div class="category">
 		<label for="category">Category</label>
 
-		<select class="text" name="category_id">
+		<select class="form-text" class="text" name="category_id">
 			{{#categories}}
 				<option {{selected}} value="{{id}}">{{category}}</option>
 			{{/categories}}
@@ -13,7 +14,8 @@
 	</div>
 	<div class="description">
 		<label for="products">Product</label>
-		<input type="text" name="description" value="{{data.description}}">
+		<input class="form-text" type="text" name="description" value="{{data.description}}">
 	</div>
 	<button type="submit" class="btn btn-primary">Submit</button>
+</div>
 </form>

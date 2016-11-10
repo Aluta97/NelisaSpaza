@@ -34,3 +34,7 @@ thead {
 .field > label {
 	width: 30px;
 }
+
+.form-text{
+  color: black !important;
+}

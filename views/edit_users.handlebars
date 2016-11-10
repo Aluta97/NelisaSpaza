@@ -3,12 +3,13 @@
 <form action="/users/update/{{data.id}}" method="POST">
   <div>
 	<label for="">Username</label>
-	<input type="text" name="username" value="{{data.username}}">
+	<input class="form-text" type="text" name="username" value="{{data.username}}">
 </div>
-<div>
-  <label for="">Password</label>
-  <input type="text" name="password" value="{{data.password}}">
-</div>
-  <button class="btn btn-primary" type="submit"></button>
 
+<div>
+  <label for="">Email</label>
+  <input class="form-text" type="text" name="email" value="{{data.email}}">
+</div>
+
+<button type="submit" class="btn btn-primary">Submit</button>
 </form>

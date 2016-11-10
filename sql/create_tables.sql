@@ -45,6 +45,6 @@ create table purcahses (
 create table users (
   id int primary key auto_increment,
   username char(100) not null,
-  password char(100) not null,
-  email char(100) not null
+  email char(100) not null,
+  password char(100) not null
 );

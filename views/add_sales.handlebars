@@ -1,10 +1,14 @@
 <h1>Add sales</h1>
 
 <form action="/sales/add" method="POST">
+
+<div class="container">
+
 	<div class="product">
+
 		<label for="product">Product</label>
 
-	<select class="product" name="prod_id">
+	<select class="form-text" class="product" name="prod_id">
 		{{#products}}
 			<option value="{{id}}">{{description}}</option>
 		{{/products}}
@@ -13,18 +17,21 @@
 
 	<div>
 		<label for="date">Date</label>
-		<input type="text" name="selling_date" value="{{selling_date}}">
+		<input class="form-text" type="text" name="selling_date" value="{{selling_date}}">
 	</div>
 
   <div>
 		<label for="quantity">Quantity</label>
-		<input type="number" name="quantity" value="{{quantity}}">
+		<input class="form-text" type="number" name="quantity" value="{{quantity}}">
   </div>
 
   <div>
 		<label for="price">Price</label>
-		<input type="text" name="selling_prices" value="{{selling_prices}}">
+		<input class="form-text" type="text" name="selling_prices" value="{{selling_prices}}">
 	</div>
 
 	<button type="submit" class="btn btn-primary">Submit</button>
+
+</div>
+
 </form>

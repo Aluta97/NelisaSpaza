@@ -13,8 +13,7 @@
   <thead>
     <tr>
       <th>username</th>
-      <th>password</th>
-      <!-- <th>email</th> -->
+      <th>email</th>
     </tr>
   </thead>
 
@@ -22,8 +21,7 @@
     {{#users}}
       <tr>
         <td>{{username}}</td>
-        <td>{{password}}</td>
-        <!-- <td>{{email}}</td> -->
+        <td>{{email}}</td>
 
         {{#if ../is_admin}}
         <td><a href="/users/edit/{{id}}" type="button" class="btn btn-primary">Edit</a></td>

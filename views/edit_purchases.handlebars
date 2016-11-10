@@ -1,11 +1,11 @@
-                          <h1>Edit purchases</h1>
+  <h1>Edit purchases</h1>
 
 <form action="/purchases/update/{{data.id}}" method="POST">
-
+<div "container">
   <div class="description">
     <label for="description">Product</label>
 
-    <select class="text" name="prod_id">
+    <select class="form-text" class="text" name="prod_id">
       {{#products}}
         <option {{selected}} value="{{id}}">{{description}}</option>
       {{/products}}
@@ -14,17 +14,18 @@
 
 	<div>
 		<label for="date">Date</label>
-		<input type="text" step="any" name="purchase_date" value="{{data.purchase_date}}">
+		<input class="form-text" type="text" step="any" name="purchase_date" value="{{data.purchase_date}}">
 	</div>
 
 	<div>
 		<label for="price">Cost</label>
-		<input type="text" step="any" name="cost" value="{{data.cost}}">
+		<input class="form-text" type="text" step="any" name="cost" value="{{data.cost}}">
   	</div>
 
 	<div>
 		<label for="quantity">Quantity</label>
-		<input type="number" step="any" name="quantity" value="{{data.quantity}}">
+		<input class="form-text" type="number" step="any" name="quantity" value="{{data.quantity}}">
 	</div>
 	<button type="submit" class="btn btn-primary">Submit</button>
+</div>
 </form>

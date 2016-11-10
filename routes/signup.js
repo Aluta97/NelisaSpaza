@@ -15,6 +15,7 @@ exports.add = function(req, res, next) {
     var data = {
       username: req.body.username,
       password: req.body.password,
+      email : req.body.email
     };
 
     console.log(data);
