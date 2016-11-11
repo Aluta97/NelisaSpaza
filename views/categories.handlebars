@@ -1,36 +1,37 @@
 <h1>Categories</h1>
 
-<!-- <button type "button" href="/categories/add">add category</button> -->
 {{#if is_admin}}
 <a href="/categories/add" type="button" class="btn btn-primary">add category</a>
 {{else}}
   <a></a>
 {{/if}}
 
-<div class="container">
+<div class="form-group pull-right">
+ <div class="form-group pull-right">
+ <input class="form-text" type="text" class="search form-control" placeholder="search">
+</div>
 
+<div class="container">
   <table class="table table-bordered">
   <thead>
     <tr>
       <th>categories</th>
     </tr>
   </thead>
-
   <tbody>
     {{#categories}}
       <tr>
         <td>{{category}}</td>
 
-        {{#if ../is_admin}}
-        <td><a href="/categories/edit/{{id}}" type="button" class="btn btn-primary">Edit</a></td>
-        <td><a href="/categories/delete/{{id}}" type="button" class="btn btn-primary">Delete</a></td>
-        <td></td>
-        {{else}}
+          {{#if ../is_admin}}
+              <td><a href="/categories/edit/{{id}}" type="button" class="btn btn-primary">Edit</a></td>
+              <td><a href="/categories/delete/{{id}}" type="button" class="btn btn-primary">Delete</a></td>
+            <td></td>
+          {{else}}
           <td></td>
-        {{/if}}
+          {{/if}}
       </tr>
     {{/categories}}
   </tbody>
-  </table>
-
+ </table>
 </div>
