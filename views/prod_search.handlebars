@@ -1,19 +1,5 @@
-<h1>Products</h1>
+<!-- <h2>yourresults</h2> -->
 
-{{#if is_admin}}
-<a href="/products/add" type="button" class="btn btn-primary">Add Product</a>
-{{else}}
-  <td></td>
-{{/if}}
-
- <form action="/products/search/" method="post">
-   <div class="form-group pull-right">
-     <input type="text" name="search_value" class="search form-control" placeholder="search">
-     <input type="submit" class="btn btn-primary">
-  </div>
-</form>
-
-<div class="container">
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -38,4 +24,3 @@
       {{/products}}
   </tbody>
  </table>
-</div>

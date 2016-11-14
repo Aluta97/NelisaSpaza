@@ -134,12 +134,16 @@ app.post('/categories/update/:id', checkUser,mid.checkIfAdmin, categories.update
 app.post('/categories/add', checkUser,mid.checkIfAdmin, categories.add);
 app.get('/categories/delete/:id', checkUser,mid.checkIfAdmin, categories.delete);
 
+app.post('/categories/search', categories.searchCategories);
+
 app.get('/products',checkUser, products.show);
 app.get('/products/add',checkUser,mid.checkIfAdmin, products.showAdd);
 app.get('/products/edit/:id',checkUser,mid.checkIfAdmin, products.get);
 app.post('/products/update/:id',checkUser,mid.checkIfAdmin, products.update);
 app.post('/products/add',checkUser,mid.checkIfAdmin, products.add);
 app.get('/products/delete/:id',checkUser,mid.checkIfAdmin, products.delete);
+
+app.post('/products/search/',products.productSearch);
 
 app.get('/sales',checkUser, mid.checkIfAdmin,sales.show);
 app.get('/sales/add',checkUser,mid.checkIfAdmin, sales.showAdd);
@@ -148,12 +152,17 @@ app.post('/sales/update/:id',checkUser,mid.checkIfAdmin, sales.update);
 app.post('/sales/add/',checkUser,mid.checkIfAdmin, sales.add);
 app.get('/sales/delete/:id',checkUser,mid.checkIfAdmin, sales.delete);
 
+app.post('/sales/search/',sales.salesSearch);
+
+
 app.get('/purchases',checkUser,mid.checkIfAdmin, purchases.show);
 app.get('/purchases/add',checkUser,mid.checkIfAdmin, purchases.showAdd);
 app.get('/purchases/edit/:id',checkUser,mid.checkIfAdmin, purchases.get);
 app.post('/purchases/update/:id',checkUser,mid.checkIfAdmin, purchases.update);
 app.post('/purchases/add/',checkUser,mid.checkIfAdmin, purchases.add);
 app.get('/purchases/delete/:id',checkUser,mid.checkIfAdmin, purchases.delete);
+
+app.post('/purchases/search/',purchases.purchasesSearch);
 
 app.get('/users', checkUser,mid.checkIfAdmin, users.show);
 app.get('/users/add',checkUser,mid.checkIfAdmin, users.showAdd);
@@ -164,7 +173,6 @@ app.get('/users/delete/:id',checkUser,mid.checkIfAdmin, users.delete);
 
 app.get('/signup',signup.show);
 app.post('/signup/add',signup.add);
-// app.get('/signup/update/id', signup.udate);
 
 app.use(errorHandler);
 

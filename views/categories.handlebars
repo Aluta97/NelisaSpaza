@@ -6,10 +6,12 @@
   <a></a>
 {{/if}}
 
-<div class="form-group pull-right">
- <div class="form-group pull-right">
- <input class="form-text" type="text" class="search form-control" placeholder="search">
-</div>
+<form action="/categories/search/" method="post">
+  <div class="form-group pull-right">
+    <input type="text" name="search_value" class="search form-control" placeholder="search">
+    <input type="submit" class="btn btn-primary">
+ </div>
+</form>
 
 <div class="container">
   <table class="table table-bordered">

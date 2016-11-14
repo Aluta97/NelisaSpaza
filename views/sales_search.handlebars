@@ -1,0 +1,28 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>selling_date</th>
+      <th>quantity</th>
+      <th>selling_prices</th>
+      <th>product</th>
+    </tr>
+  </thead>
+
+  <tbody>
+      {{#sales}}
+      <tr>
+        <td>{{selling_date}}</td>
+        <td>{{quantity}}</td>
+        <td>{{selling_prices}}</td>
+        <td>{{description}}</td>
+
+        {{#if ../is_admin}}
+        <td><a href="/sales/edit/{{sales_id}}" type="button" class="btn btn-primary">Edit</a></td>
+        <td><a href="/sales/delete/{{sales_id}}" type="button" class="btn btn-primary">Delete</a></td>
+        {{else}}
+          <td></td>
+        {{/if}}
+      </tr>
+      {{/sales}}
+    </tbody>
+  </table>

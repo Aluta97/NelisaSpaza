@@ -24,11 +24,11 @@
 	      <li><a href="/categories">categories</a></li>
 	      <li><a href="/products">products</a></li>
 
-        {{#if user.is_admin}}
+         {{#if user.is_admin}}
 	      <li><a href="/sales">sales</a></li>
 				<li><a href="/purchases">purchases</a></li>
-        {{else}}
-        {{/if}}
+         {{else}}
+         {{/if}}
 	    </ul>
 
 			<ul class="nav navbar-nav navbar-right">
@@ -41,10 +41,11 @@
 			      <li><a href="/login"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
 			{{/if}}
     </ul>
-	  </div>
+	 </div>
 	</nav>
 	{{{body}}}
 </body>
+
 <!-- background image using backstretch -->
 <script src="/jquery.backstretch.min.js"></script>
 <script>

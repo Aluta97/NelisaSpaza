@@ -1,0 +1,22 @@
+<table class="table table-bordered">
+<thead>
+  <tr>
+    <th>categories</th>
+  </tr>
+</thead>
+<tbody>
+  {{#categories}}
+    <tr>
+      <td>{{category}}</td>
+
+        {{#if ../is_admin}}
+            <td><a href="/categories/edit/{{id}}" type="button" class="btn btn-primary">Edit</a></td>
+            <td><a href="/categories/delete/{{id}}" type="button" class="btn btn-primary">Delete</a></td>
+          <td></td>
+        {{else}}
+        <td></td>
+        {{/if}}
+    </tr>
+  {{/categories}}
+</tbody>
+</table>

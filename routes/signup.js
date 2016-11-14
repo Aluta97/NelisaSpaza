@@ -4,11 +4,6 @@ exports.show = function(req, res) {
   res.render('signup');
 }
 
-// exports.showAdd = function(req, res){
-// 	res.render('add_user');
-// }
-
-
 exports.add = function(req, res, next) {
   req.getConnection(function(err, connection) {
     if (err) return next(err);

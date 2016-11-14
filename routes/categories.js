@@ -13,6 +13,20 @@ exports.show = function (req, res, next) {
 	});
 };
 
+exports.searchCategories = function (req, res, next) {
+	req.getConnection(function(err, connection){
+		if (err) return next(err);
+		connection.query('SELECT * from categories where category like ?', '%' + req.body.search_value + '%', function(err, results) {
+        if (err) return next(err);
+		res.render( 'category_search', {
+				categories : results,
+				user : req.session.user,
+				is_admin:req.session.user.is_admin
+		});
+      });
+	});
+};
+
 exports.showAdd = function(req, res){
 	res.render('add_category', {user : req.session.user,
 	is_admin:req.session.user.is_admin});

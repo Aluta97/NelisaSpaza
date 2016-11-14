@@ -1,0 +1,28 @@
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>purchase_date</th>
+      <th>quantity</th>
+      <th>cost</th>
+      <th>product</th>
+    </tr>
+  </thead>
+
+  <tbody>
+  {{#purchases}}
+      <tr>
+        <td>{{purchase_date}}</td>
+        <td>{{quantity}}
+        <td>{{cost}}</td>
+        <td>{{description}}</td>
+
+        {{#if ../is_admin}}
+        <td><a href="/purchases/edit/{{purcahses_id}}" type="button" class="btn btn-primary">Edit</a></td>
+        <td><a href="/purchases/delete/{{purcahses_id}}" type="button" class="btn btn-primary">Delete</a></td>
+        {{else}}
+          <td></td>
+        {{/if}}
+      </tr>
+  {{/purchases}}
+  </tbody>
+</table>
