@@ -8,13 +8,13 @@
 
 <form action="/categories/search/" method="post">
   <div class="form-group pull-right">
-    <input type="text" name="search_value" class="search form-control" placeholder="search">
+    <input type="text" id="search-bar-categories" name="search_value" class="search form-control" placeholder="search">
     <input type="submit" class="btn btn-primary">
  </div>
 </form>
 
 <div class="container">
-  <table class="table table-bordered">
+  <table class="table table-bordered" id=category_search"">
   <thead>
     <tr>
       <th>categories</th>
@@ -37,3 +37,17 @@
   </tbody>
  </table>
 </div>
+
+
+<script>
+var reqwest = require('./reqwest');
+
+reqwest({
+      url : '/categories/search/',
+   method : 'post',
+     data : { foo: 'bar', baz: 100 },
+   success: function (resp) {
+      qwery('#category_search').html(resp)
+    }
+})
+</script>
