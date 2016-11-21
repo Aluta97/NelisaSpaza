@@ -8,13 +8,13 @@
 
  <form action="/products/search/" method="post">
    <div class="form-group pull-right">
-     <input type="text" name="search_value" class="search form-control" placeholder="search">
+     <input type="text" id="searchBarProducts" name="search_value" class="search form-control" placeholder="search">
      <input type="submit" class="btn btn-primary">
   </div>
 </form>
 
 <div class="container">
-  <table class="table table-bordered">
+  <table id="productsSearch" class="table table-bordered">
     <thead>
       <tr>
         <th>product</th>
@@ -39,3 +39,30 @@
   </tbody>
  </table>
 </div>
+
+<script>
+//search using ajax
+//
+// jQuery('#searchBarCategories').submit( function(event){
+//
+//   // Stop the form from submitting normally
+//   event.preventDefault();
+//
+//   // Get the search term from the DOM
+//   var search_value = jQuery('#search_value').val();
+//
+//   // use jQuery to POST the data to the /search URL
+//   jQuery.post('/categories/search', {search_value: search_value}, function(result){
+//     console.log(result);
+//   });
+//
+// });
+$(document).ready(function() {
+   $("#searchBarProducts").keyup(function() {
+     var search_value = $("#searchBarProducts").val();
+     $.post("/products/search", {search_value : search_value} , function(results) {
+       $("#productsSearch").html(results)
+     });
+   });
+ });
+</script>

@@ -8,14 +8,14 @@
 
 <form action="/sales/search/" method="post">
   <div class="form-group pull-right">
-    <input type="text" name="search_value" class="search form-control" placeholder="search">
+    <input type="text" id="searchBarSales" name="search_value" class="search form-control" placeholder="search">
     <input type="submit" class="btn btn-primary">
  </div>
 </form>
 
 
 <div class="container">
-  <table class="table table-bordered">
+  <table id="salesSearch" class="table table-bordered">
     <thead>
       <tr>
         <th>selling_date</th>
@@ -44,3 +44,30 @@
       </tbody>
     </table>
 </div>
+
+<script>
+//search using ajax
+//
+// jQuery('#searchBarCategories').submit( function(event){
+//
+//   // Stop the form from submitting normally
+//   event.preventDefault();
+//
+//   // Get the search term from the DOM
+//   var search_value = jQuery('#search_value').val();
+//
+//   // use jQuery to POST the data to the /search URL
+//   jQuery.post('/categories/search', {search_value: search_value}, function(result){
+//     console.log(result);
+//   });
+//
+// });
+$(document).ready(function() {
+   $("#searchBarSales").keyup(function() {
+     var search_value = $("#searchBarSales").val();
+     $.post("/sales/search", {search_value : search_value} , function(results) {
+       $("#salesSearch").html(results)
+     });
+   });
+ });
+</script>

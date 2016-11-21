@@ -20,7 +20,8 @@ exports.purchasesSearch = function (req, res, next) {
     		res.render( 'purchases_search', {
 					purchases : results,
 					user : req.session.user,
-					is_admin:req.session.user.is_admin
+					is_admin:req.session.user.is_admin,
+					layout: false
     		});
       	});
 	});

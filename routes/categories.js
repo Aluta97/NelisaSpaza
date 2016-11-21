@@ -21,7 +21,8 @@ exports.searchCategories = function (req, res, next) {
 		res.render( 'category_search', {
 				categories : results,
 				user : req.session.user,
-				is_admin:req.session.user.is_admin
+				is_admin:req.session.user.is_admin,
+				layout: false
 		});
       });
 	});

@@ -26,7 +26,8 @@ exports.productSearch = function(req, res, next) {
       res.render('prod_search', {
         products: results,
 				user : req.session.user,
-				is_admin:req.session.user.is_admin
+				is_admin:req.session.user.is_admin,
+				layout: false
       });
     })
   })

@@ -154,7 +154,6 @@ app.get('/sales/delete/:id',checkUser,mid.checkIfAdmin, sales.delete);
 
 app.post('/sales/search/',sales.salesSearch);
 
-
 app.get('/purchases',checkUser,mid.checkIfAdmin, purchases.show);
 app.get('/purchases/add',checkUser,mid.checkIfAdmin, purchases.showAdd);
 app.get('/purchases/edit/:id',checkUser,mid.checkIfAdmin, purchases.get);
@@ -183,7 +182,7 @@ app.use(errorHandler);
 // });
 
 //set the port number to an existing environment variable PORT or default to 5000
-app.set('port', (process.env.PORT || 3000));
+app.set('port', (process.env.PORT || 5000));
 //start the app like this:
 app.listen(app.get('port'), function() {
   console.log('Node app is running on port', app.get('port'));
