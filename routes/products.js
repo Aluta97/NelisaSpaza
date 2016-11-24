@@ -22,7 +22,7 @@ exports.productSearch = function(req, res, next) {
 		// connection.query('SELECT products.id as product_id, products.description, categories.category FROM categories inner join products on products.category_Id = categories.Id ORDER BY product_id DESC', [], function(err, results) {
 		connection.query('SELECT products.id as product_id, products.description, categories.category FROM categories inner join products on products.category_Id = categories.id where products.description like ?', '%' + req.body.search_value + '%', function(err, results) {
       if (err) return next(err);
-      console.log('Record Updated ' + results);
+
       res.render('prod_search', {
         products: results,
 				user : req.session.user,

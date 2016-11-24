@@ -39,7 +39,8 @@ var sellingPrices = require('./files/sales.json');
   //console.log(results);
    return results;
 };
-//
+
+
 var week = process.argv[2];
 //weeklyStats(week);
 

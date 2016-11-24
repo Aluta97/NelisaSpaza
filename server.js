@@ -1,4 +1,6 @@
 var express = require('express'),
+    handlebars = require('handlebars'),
+    products = require('./products'),
     exphbs  = require('express-handlebars'),
     mysql = require('mysql'),
     myConnection = require('express-myconnection'),
@@ -10,6 +12,7 @@ var express = require('express'),
     sales = require('./routes/sales'),
     users = require('./routes/users'),
     signup = require('./routes/signup'),
+    // app = require('./routes/app'),
     flash = require('express-flash'),
     mid = require('./middlewares');
     bcrypt = require('bcrypt');
@@ -88,7 +91,7 @@ app.post("/login", function(req, res, next){
             if (err) return next(err);
 
               if (results.length === 0){
-                console.log("Access denied....");
+                // console.log("Access denied....");
 
                 req.flash("warning", "You have entered a wrong username or password")
                 return res.redirect("/login");
@@ -96,9 +99,9 @@ app.post("/login", function(req, res, next){
               else{
                 var dbUser = results[0];
                   bcrypt.compare(inputUser.password, dbUser.password, function(err, match) {
-
+                      // console.log(inputUser);
                 if(match){
-                       console.log("password match.....");
+                      //  console.log("password match.....");
 
                       req.session.user = inputUser;
                       res.redirect('/home');
@@ -173,13 +176,15 @@ app.get('/users/delete/:id',checkUser,mid.checkIfAdmin, users.delete);
 app.get('/signup',signup.show);
 app.post('/signup/add',signup.add);
 
+// app.get('/:week_name', app.show);
+
 app.use(errorHandler);
 
-// app.get('/sales/:week_name', function(req, res){
-//   var week_name = req.params.week_name
-//    //console.log(week_name)
-//   res.send(application.weeklyStats(week_name));
-// });
+app.get('/sales/:week_name', function(req, res){
+   console.log(week_name)
+  res.render(application.weeklyStats(week_name));
+});
+
 
 //set the port number to an existing environment variable PORT or default to 5000
 app.set('port', (process.env.PORT || 3000));

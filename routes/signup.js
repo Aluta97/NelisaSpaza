@@ -13,12 +13,13 @@ exports.add = function(req, res, next) {
       email : req.body.email
     };
 
-    console.log(data);
+    // console.log(data);
 
     var password = req.body.password;
     bcrypt.hash(password, 10, function(err, hash) {
             data.password = hash;
 
+console.log(password);
     connection.query('insert into users set ?', data, function(err, results) {
       if (err) return next(err)
       res.redirect('/login');
