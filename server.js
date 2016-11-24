@@ -12,7 +12,6 @@ var express = require('express'),
     sales = require('./routes/sales'),
     users = require('./routes/users'),
     signup = require('./routes/signup'),
-    // app = require('./routes/app'),
     flash = require('express-flash'),
     mid = require('./middlewares');
     bcrypt = require('bcrypt');

@@ -15,7 +15,7 @@ exports.show = function (req, res, next) {
 exports.purchasesSearch = function (req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err) return next(err);
-    connection.query('SELECT purcahses.id, purcahses.quantity, purcahses.purchase_date, purcahses.cost, products.description FROM purcahses inner join products on purcahses.prod_id = products.id WHERE products.description LIKE ? ', '%' + req.body.search_value + '%', function(err, results) {
+    connection.query('SELECT purcahses.id, purcahses.quantity, purcahses.purchase_date, purcahses.cost, products.description FROM purcahses inner join products on purcahses.prod_id = products.id WHERE products.description LIKE ? ORDER BY purcahses.id DESC', '%' + req.body.search_value + '%', function(err, results) {
         	if (err) return next(err);
     		res.render( 'purchases_search', {
 					purchases : results,

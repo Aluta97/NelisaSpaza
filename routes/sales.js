@@ -15,7 +15,7 @@ exports.show = function (req, res, next) {
 exports.salesSearch = function (req, res, next) {
 	req.getConnection(function(err, connection){
 		if (err) return next(err);
-    connection.query('SELECT sales.id, sales.selling_date, sales.quantity, sales.selling_prices, products.description FROM sales INNER JOIN products ON sales.prod_id = products.id WHERE products.description LIKE ? ', '%' + req.body.search_value + '%', function(err, results) {
+    connection.query('SELECT sales.id, sales.selling_date, sales.quantity, sales.selling_prices, products.description FROM sales INNER JOIN products ON sales.prod_id = products.id WHERE products.description LIKE ? ORDER BY sales.id DESC', '%' + req.body.search_value + '%', function(err, results) {
       if (err) return next(err);
         	if (err) return next(err);
     		res.render( 'sales_search', {
