@@ -46,21 +46,7 @@
 
 <script>
 //search using ajax
-//
-// jQuery('#searchBarCategories').submit( function(event){
-//
-//   // Stop the form from submitting normally
-//   event.preventDefault();
-//
-//   // Get the search term from the DOM
-//   var search_value = jQuery('#search_value').val();
-//
-//   // use jQuery to POST the data to the /search URL
-//   jQuery.post('/categories/search', {search_value: search_value}, function(result){
-//     console.log(result);
-//   });
-//
-// });
+
 $(document).ready(function() {
    $("#searchBarPurchases").keyup(function() {
      var search_value = $("#searchBarPurchases").val();

@@ -13,7 +13,6 @@
  </div>
 </form>
 
-<!-- <body> -->
 <div class="container">
   <table  id="categorySearch" class="table table-bordered">
   <thead>
@@ -30,8 +29,6 @@
               <td><a href="/categories/edit/{{id}}" type="button" class="btn btn-primary">Edit</a></td>
               <td><a href="/categories/delete/{{id}}" type="button" class="btn btn-primary">Delete</a></td>
             <td></td>
-          {{else}}
-          <!-- <td></td> -->
           {{/if}}
       </tr>
     {{/categories}}
@@ -42,21 +39,7 @@
 
 <script>
 //search using ajax
-//
-// jQuery('#searchBarCategories').submit( function(event){
-//
-//   // Stop the form from submitting normally
-//   event.preventDefault();
-//
-//   // Get the search term from the DOM
-//   var search_value = jQuery('#search_value').val();
-//
-//   // use jQuery to POST the data to the /search URL
-//   jQuery.post('/categories/search', {search_value: search_value}, function(result){
-//     console.log(result);
-//   });
-//
-// });
+});
 $(document).ready(function() {
    $("#searchBarCategories").keyup(function() {
      var search_value = $("#searchBarCategories").val();
