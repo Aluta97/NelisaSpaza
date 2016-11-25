@@ -179,11 +179,11 @@ app.post('/signup/add',signup.add);
 
 app.use(errorHandler);
 
-app.get('/sales/:week_name', function(req, res){
-   console.log(week_name)
-  res.render(application.weeklyStats(week_name));
-});
-
+// app.get('/sales/:week_name', function(req, res){
+//    console.log(week_name)
+//   res.render(application.weeklyStats(week_name));
+// });
+//
 
 //set the port number to an existing environment variable PORT or default to 5000
 app.set('port', (process.env.PORT || 3000));
